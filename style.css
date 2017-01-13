@@ -1,0 +1,52 @@
+.container{
+	margin-top: 2%;
+}
+
+thead, tbody, tr, td, th {
+	display: block;
+}
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 30px;
+}
+
+tbody {
+    height: 390px;
+    overflow-y: auto;
+	border: hidden;
+}
+
+tbody td, thead th {
+    width: 100%;
+	height: 40px;
+    float: left;
+}
+
+
+.input-group{
+	width: 30%;
+}
+
+.stylish-input-group .input-group-addon{
+    background: white !important; 
+}
+.stylish-input-group .form-control{
+	border-right:0; 
+	box-shadow:0 0 0; 
+	border-color:#ccc;
+}
+.stylish-input-group button{
+    border:0;
+    background:transparent;
+}
+
+.form-horizontal{
+	width: 90%;
+}
