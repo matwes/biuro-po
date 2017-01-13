@@ -95,17 +95,17 @@ if(!$conn->query("ALTER TABLE `Cel podrozy` ADD INDEX `FKCel podroz956837` (Kraj
   die($conn->error);
 }
 
-if(!$conn->query("ALTER TABLE `Wspolpracownik_ Zapytanie o przejazd` ADD INDEX FKWspolpraco579477 (WspolpracownikID), ADD CONSTRAINT FKWspolpraco579477 FOREIGN KEY (WspolpracownikID) REFERENCES Wspolpracownik (ID);") === TRUE){
+if(!$conn->query("ALTER TABLE `Wspolpracownik_ Zapytanie o przejazd` ADD INDEX FKWspolpraco579477 (WspolpracownikID), ADD CONSTRAINT FKWspolpraco579477 FOREIGN KEY (WspolpracownikID) REFERENCES `Wspolpracownik` (ID);") === TRUE){
   die($conn->error);
 }
 
-#if(!$conn->query("ALTER TABLE `Wspolpracownik_ Zapytanie o przejazd` ADD INDEX FKWspolpraco 206820 (`Zapytanie o przejazdID`), ADD CONSTRAINT FKWspolpraco206820 FOREIGN KEY (`Zapytanie o przejazdID`) REFERENCES ` Zapytanie o przejazd` (ID);") === TRUE){
-#  die($conn->error);
-#}
+if(!$conn->query("ALTER TABLE `Wspolpracownik_ Zapytanie o przejazd` ADD INDEX FKWspolpraco206820 (`Zapytanie o przejazdID`), ADD CONSTRAINT FKWspolpraco206820 FOREIGN KEY (`Zapytanie o przejazdID`) REFERENCES `Zapytanie o przejazd` (ID);") === TRUE){
+  die($conn->error);
+}
 
-#if(!$conn->query("ALTER TABLE `Zapytanie o nocleg_Wspolpracownik` ADD INDEX `FKZapytanie 563828` (WspolpracownikID), ADD CONSTRAINT `FKZapytanie 563828` FOREIGN KEY (WspolpracownikID) REFERENCES Wspolpracownik (ID);") === TRUE){
-#  die($conn->error);
-#}
+if(!$conn->query("ALTER TABLE `Zapytanie o nocleg_Wspolpracownik` ADD INDEX `FKZapytanie 563828` (WspolpracownikID), ADD CONSTRAINT `FKZapytanie 563828` FOREIGN KEY (WspolpracownikID) REFERENCES Wspolpracownik (ID);") === TRUE){
+  die($conn->error);
+}
 
 if(!$conn->query("ALTER TABLE `Zapytanie o nocleg_Wspolpracownik` ADD INDEX `FKZapytanie 503239` (`Zapytanie o noclegID`), ADD CONSTRAINT `FKZapytanie 503239` FOREIGN KEY (`Zapytanie o noclegID`) REFERENCES `Zapytanie o nocleg` (ID);") === TRUE){
   die($conn->error);
@@ -115,9 +115,9 @@ if(!$conn->query("ALTER TABLE `Zapytanie o nocleg` ADD INDEX `FKZapytanie 975585
   die($conn->error);
 }
 
-#if(!$conn->query("ALTER TABLE ` Zapytanie o przejazd` ADD INDEX `FK Zapytanie526776` (`Cel podrozyID`), ADD CONSTRAINT `FK Zapytanie526776` FOREIGN KEY (`Cel podrozyID`) REFERENCES `Cel podrozy` (ID);") === TRUE){
-#  die($conn->error);
-#}
+if(!$conn->query("ALTER TABLE `Zapytanie o przejazd` ADD INDEX `FK Zapytanie526776` (`Cel podrozyID`), ADD CONSTRAINT `FK Zapytanie526776` FOREIGN KEY (`Cel podrozyID`) REFERENCES `Cel podrozy` (ID);") === TRUE){
+  die($conn->error);
+}
 
 if(!$conn->query("ALTER TABLE `Usluga nocleg` ADD INDEX `FKUsluga noc656217` (`Cel podrozyID`), ADD CONSTRAINT `FKUsluga noc656217` FOREIGN KEY (`Cel podrozyID`) REFERENCES `Cel podrozy` (ID);") === TRUE){
   die($conn->error);
