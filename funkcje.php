@@ -6,21 +6,23 @@ class Funkcje
 	{
 		$udaloSie = true;
 		
-		$checkconnection = mysql_connect('localhost', 'root', 'pass');
+		$checkconnection = mysqli_connect('localhost', 'root', 'pass');
 		if(!$checkconnection) {
 			$udaloSie = false;
 		}
 		
-		$db_selected = mysql_select_db('biuro');
+		$db_selected = mysqli_select_db($checkconnection, 'biuro');
 		if (!$db_selected) {
 			$udaloSie = false;
 		}
 		
+                
+                $conn = new mysqli('localhost', 'root', 'pass', 'biuro'); 
 		$sql = "SELECT Nazwa FROM wspolpracownik";
-		$result = mysql_query($sql);
+		$result = $conn->query($sql);
 		
 		$i = 0;
-		while($row = mysql_fetch_array($result))
+		while($row = $result->fetch_assoc())
 		{
 			echo "<tr><td>".$row['Nazwa']."</td></tr>";
 			$i = $i + 1;
