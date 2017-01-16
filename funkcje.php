@@ -2,22 +2,27 @@
 
 class Funkcje
 {
-	public function pobierzWspolpracownikow()
+		public function zaladujBaze()
 	{
 		$udaloSie = true;
 		
 		$checkconnection = mysqli_connect('localhost', 'root', 'pass');
 		if(!$checkconnection) {
-			$udaloSie = false;
+			die('Nie udało się połączyć do bazy danych');
 		}
 		
 		$db_selected = mysqli_select_db($checkconnection, 'biuro');
 		if (!$db_selected) {
-			$udaloSie = false;
+			die('Nie udało się połączyć do bazy danych');
 		}
-		
-                
-                $conn = new mysqli('localhost', 'root', 'pass', 'biuro'); 
+		           
+        $conn = new mysqli('localhost', 'root', 'pass', 'biuro'); 
+		return $conn;
+	}
+	
+	public function pobierzWspolpracownikow()
+	{
+		$conn = $this->zaladujBaze();
 		$sql = "SELECT Nazwa FROM wspolpracownik";
 		$result = $conn->query($sql);
 		
@@ -34,7 +39,7 @@ class Funkcje
 			$i = $i + 1;
 		}
 		
-		return $udaloSie;
+		return $i;
 	}
 }
 
