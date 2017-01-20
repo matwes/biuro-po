@@ -48,8 +48,7 @@ tbody td, thead th {
 }
 
 .form-horizontal{
-	width: 90%;
-	align: center;
+	width: 100%;
 }
 
 .jumbotron{
@@ -66,4 +65,20 @@ tbody td, thead th {
   display:inline-block;
   overflow: auto;
   white-space: nowrap;
+}
+
+.test2 {
+  width: 100%;
+  display:inline-block;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.root:hover > .dropdown-menu{
+    display: block;
+}
+
+.navbar-nav > li > .dropdown-menu {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
