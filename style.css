@@ -18,17 +18,30 @@ thead th {
 }
 
 tbody {
-    height: 390px;
+    height: 250px;
     overflow-y: auto;
 	border: hidden;
 }
 
 tbody td, thead th {
     width: 100%;
-	height: 40px;
+	height: 35px;
     float: left;
 }
 
+td:hover {
+    background-color: #337ab7;
+}
+
+td:hover .nazwyF{
+    color: white;
+}
+
+.nazwyF{
+	display: block;
+	width: 100%;
+	color: black;
+}
 
 .input-group{
 	width: 30%;
@@ -83,8 +96,133 @@ tbody td, thead th {
     border-top-right-radius: 10px;
 }
 
-.nazwyF{
-	display: block;
-	width: 100%;
-	color: black;
+
+
+
+
+.mini-popup-mask {
+  position: absolute;
+  z-index: 9998;
+  top: 0px;
+  left: 0px;
+  background-color: #000000;
+  display: none;
+  width: 100%;
+  height: 100%;
+  filter: alpha(opacity=70);
+  opacity: 0.7;
 }
+
+.mini-popup {
+  position: absolute;
+  z-index: 9999;
+  width: 495px;
+  height: auto;
+  background: #fff;
+  overflow: hidden;
+  padding: 15px 0 35px 0;
+  display: none;
+  font-size: 12px;
+}
+
+.mini-popup-buttons {
+  background: url(images/popup-buttons.png) no-repeat;
+  display: inline-block;
+}
+
+*+html .mini-popup-buttons { display: inline; }
+
+.mini-popup-header {
+  height: 13px;
+  clear: both;
+}
+
+.mini-popup-close {
+  float: right;
+  width: 13px;
+  height: 13px;
+  margin-right: 16px;
+  cursor: pointer;
+  background-position: 0 -80px;
+}
+
+.mini-popup-content {
+  margin: 0 35px 0 45px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid #858585;
+  color: #<a href="http://www.jqueryscript.net/tags.php?/3D/">3D</a>4550;
+}
+
+.mini-popup-content p {
+  margin: 15px 0 0 0;
+  line-height: 18px;
+}
+
+.mini-popup-footer {
+  margin: 25px 45px 0 45px;
+  height: 35px;
+}
+
+.confirm {
+  float: left;
+  height: 35px;
+  overflow: hidden;
+}
+
+.confirm-btn {
+  background-position: 100% 0;
+  display: inline-block;
+  height: 35px;
+  position: relative;
+  cursor: pointer;
+  margin-left: 7px;
+}
+
+*+html .confirm-btn { display: inline; }
+
+.confirm-btn input,
+.cancel-btn input {
+  background: none;
+  border: none;
+  font-weight: bold;
+  margin: 0;
+  padding: 9px 15px 12px 8px;
+  cursor: pointer;
+  overflow: visible;
+  width: auto;
+  height: 35px;
+  outline: none;
+}
+
+.confirm-btn .confirmbtn { color: #fff; }
+
+.confirm-btn span,
+.cancel-btn span {
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: -7px;
+  width: 7px;
+}
+
+.confirm-btn span.confirm-left { background-position: 0 0; }
+
+.cancel-btn span.cancel-left { background-position: 0 -40px; }
+
+.cancel {
+  float: left;
+  height: 35px;
+  margin-left: 20px;
+}
+
+.cancel-btn {
+  background-position: 100% -40px;
+  display: inline-block;
+  height: 35px;
+  position: relative;
+  cursor: pointer;
+}
+
+*+html .cancel-btn { display: inline; }
+
+.cancel-btn .cancelbtn { color: #333333; }

@@ -55,23 +55,18 @@ if (session_status() == PHP_SESSION_NONE) {
 					</div>
 					<br><br>
 					
-					<div class="form-group">
-						<div class="col-sm-10 col-sm-offset-2">
-							<span style="text-align:right">
-								<input id="submit" name="submit" type="submit" value="Send" class="btn btn-primary btn-lg pull-right">
-							</span>
-							<div style="overflow: hidden; padding-right: .5em;">
-								<div style="width:13%;" >
-									<!--<button onClick="location.href = 'index.php';" type="button" class="btn btn-primary btn-lg pull-right">Anuluj</button> -->
-									<input type="submit" name="submit" class="btn btn-primary btn-lg pull-right">
-								</div>
+					
+					<div style="width:90%; margin: 0 auto;">
+						<div class='test'>
+							<div style='float: left;'>
+								<button onClick="location.href = 'index.php';" type="button" class="btn btn-primary btn-lg pull-right">Anuluj</button>
+							</div>
+							<div style='float: right;'>
+								<input id="submit" name="submit" type="submit" value="Dodaj" class="btn btn-primary btn-lg pull-right">
 							</div>
 						</div>
 					</div>
 					
-					<div class="form-group">
-						<div class="col-sm-10 col-sm-offset-2"></div>
-					</div>
 				</form>
 			</div>
 		</div>

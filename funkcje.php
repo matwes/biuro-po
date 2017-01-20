@@ -34,7 +34,7 @@ class Funkcje
 			$i = $i + 1;
 		}
 		
-		while($i < 10)
+		while($i < 7)
 		{
 			echo "<tr><td></td></tr>";
 			$i = $i + 1;
