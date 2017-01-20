@@ -61,7 +61,7 @@ if (session_status() == PHP_SESSION_NONE) {
 								<button onclick="location.href = 'Form.php';" type="button" class="btn btn-primary btn-lg pull-right">Wróc i popraw</button>
 							</div>
 							<div style='float: right;'>
-								<button onClick="#" type="button" class="btn btn-primary btn-lg pull-right">Zatwierdź</button>
+								<button onClick="location.href = 'dodaj_wspolpracownika.php'" type="button" class="btn btn-primary btn-lg pull-right">Zatwierdź</button>
 							</div>
 						</div>
 					</div>
