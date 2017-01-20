@@ -75,10 +75,23 @@ class Funkcje
 	public function sprawdzCzyWBazie($post){
 		$message1 = $this->sprawdzEmailCzyWBazie($post);
 		$message2 = $this->sprawdzTelefonCzyWBazie($post);
-		$message = $message1 . '\r\n' .  $message2;
+		if($message1 == "" and $message2 == ""){
+		  $message = "";
+		}else{
+		  $message = $message1 . '\r\n' .  $message2;
+		}  
 		return $message;
 	}
 
+	public function zczytajWartosc($post, $zmienna){
+           $wartosc = "";
+	   if(isset($post[$zmienna])){
+             $wartosc = $post[$zmienna];
+	   }
+	   echo $wartosc;
+	}
+
+
 }
 
-?>`	
+?>	
