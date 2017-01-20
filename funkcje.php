@@ -98,9 +98,12 @@ class Funkcje
 		return $message;
 	}
 
-	public function zczytajWartosc($post, $zmienna){
+	public function zczytajWartosc($post, $session, $zmienna){
            $wartosc = "";
-	   if(isset($post[$zmienna])){
+	   if(isset($session[$zmienna])){
+             $wartosc = $session[$zmienna];
+	   }
+           if(isset($post[$zmienna])){
              $wartosc = $post[$zmienna];
 	   }
 	   return $wartosc;

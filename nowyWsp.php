@@ -58,7 +58,7 @@ if (session_status() == PHP_SESSION_NONE) {
 						<h5 align="center">Zatwierdź poprawność danych</h5><br>
 						<div class='test'>
 							<div style='float: left;'>
-								<button onClick="#" type="button" class="btn btn-primary btn-lg pull-right">Wróc i popraw</button>
+								<button onclick="location.href = 'Form.php';" type="button" class="btn btn-primary btn-lg pull-right">Wróc i popraw</button>
 							</div>
 							<div style='float: right;'>
 								<button onClick="#" type="button" class="btn btn-primary btn-lg pull-right">Zatwierdź</button>
