@@ -82,3 +82,9 @@ tbody td, thead th {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
+
+.nazwyF{
+	display: block;
+	width: 100%;
+	color: black;
+}

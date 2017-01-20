@@ -23,13 +23,14 @@ class Funkcje
 	public function pobierzWspolpracownikow()
 	{
 		$conn = $this->zaladujBaze();
-		$sql = "SELECT Nazwa FROM wspolpracownik";
+		$sql = "SELECT Nazwa, ID FROM wspolpracownik";
 		$result = $conn->query($sql);
 		
 		$i = 0;
 		while($row = $result->fetch_assoc())
 		{
-			echo "<tr><td>".$row['Nazwa']."</td></tr>";
+			$id = $row['ID'];
+			echo "<tr><td><a class='nazwyF' href='profil.php?id={$id}'>".$row['Nazwa']."</a></td></tr>";
 			$i = $i + 1;
 		}
 		
@@ -40,6 +41,20 @@ class Funkcje
 		}
 		
 		return $i;
+	}
+	
+	public function pobierzDane($id, $atr){
+		 $conn = $this->zaladujBaze();
+		 $sql = "SELECT {$atr} FROM wspolpracownik WHERE ID = {$id};";
+		 $result = $conn->query($sql);
+		 
+		 $data = '';
+		 while($row = $result->fetch_assoc())
+		{
+			$data = $row[$atr];
+		}
+		 
+		 return $data;
 	}
 
 	public function sprawdzEmailCzyWBazie($post){

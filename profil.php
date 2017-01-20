@@ -4,7 +4,16 @@ require_once 'funkcje.php';
 
 $funkcje = new Funkcje();
 
+   if(isset($_GET["id"])){
+	 $id = $_GET["id"];
+   }
 
+	$nazwa = $funkcje->pobierzDane($id, 'Nazwa');
+	$imie = $funkcje->pobierzDane($id, 'Imie');
+	$nazwisko = $funkcje->pobierzDane($id, 'Nazwisko');
+	$telefon = $funkcje->pobierzDane($id, 'Telefon');
+	$email = $funkcje->pobierzDane($id, 'Email');
+	
 ?>
 <!DOCTYPE html>
 <html lang ="pl">
@@ -19,7 +28,7 @@ $funkcje = new Funkcje();
 			<div class="jumbotron">
 			
 
-				<div class="row" style="width: 70%;">
+				<div class="row" style="width: 80%;">
 					<div class="span6">
 						<div class="nonboxy-widget">
 							<div class="widget-head">
@@ -33,32 +42,32 @@ $funkcje = new Funkcje();
 												<div>
 													<label for="firma" class="col-sm-2 control-label">Nazwa firmy</label>
 														<div class="col-sm-10">
-															<p class="nowyWsp">Jakas nazwa</p>
+															<p class="nowyWsp"><?php echo $nazwa ?></p>
 														</div>
 												</div>
 												<br>
 												<div>
 													<label for="imie" class="col-sm-2 control-label">Imię</label>
 														<div class="col-sm-10">
-															<p class="nowyWsp">Patryk</p>
+															<p class="nowyWsp"><?php echo $imie ?></p>
 														</div>
 												</div>
 												<div>
 													<label for="nazw" class="col-sm-2 control-label">Nazwisko</label>
 														<div class="col-sm-10">
-															<p class="nowyWsp">Kowalski</p>
+															<p class="nowyWsp"><?php echo $nazwisko ?></p>
 														</div>
 												</div>
 												<div>
 													<label for="tel" class="col-sm-2 control-label">Telefon</label>
 														<div class="col-sm-10">
-															<p class="nowyWsp">456678569</p>
+															<p class="nowyWsp"><?php echo $telefon ?></p>
 														</div>
 												</div>
 												<div>
 													<label for="email" class="col-sm-2 control-label">Email</label>
 													<div class="col-sm-10">
-														<p class="nowyWsp">patryk.k@hmail.com</p>
+														<p class="nowyWsp"><?php echo $email ?></p>
 													</div>
 												</div>
 											</div>
