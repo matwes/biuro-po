@@ -41,6 +41,44 @@ class Funkcje
 		
 		return $i;
 	}
+
+	public function sprawdzEmailCzyWBazie($post){
+	        $message = "";
+          	$conn = $this->zaladujBaze();
+		$email = trim($post["email"]);
+		$sql = "SELECT * FROM wspolpracownik WHERE Email = '" . trim($email) . "';";
+		$result = $conn->query($sql);
+		if(mysqli_num_rows($result) > 0){
+                  $message = "Podany email jest już w bazie danych, proszę podać inny.";
+		}
+                
+		return $message;
+
+		
+	}
+
+	public function sprawdzTelefonCzyWBazie($post){
+	        $message = "";
+          	$conn = $this->zaladujBaze();
+		$phone = trim($post["tel"]);
+		$sql = "SELECT * FROM wspolpracownik WHERE Telefon = '" . trim($phone) . "';";
+		$result = $conn->query($sql);
+		if(mysqli_num_rows($result) > 0){
+                  $message = "Podany numer telefonu jest już w bazie danych, proszę podać inny.";
+		}
+                
+		return $message;
+
+		
+	}
+
+	public function sprawdzCzyWBazie($post){
+		$message1 = $this->sprawdzEmailCzyWBazie($post);
+		$message2 = $this->sprawdzTelefonCzyWBazie($post);
+		$message = $message1 . '\r\n' .  $message2;
+		return $message;
+	}
+
 }
 
 ?>`	
