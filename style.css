@@ -49,4 +49,21 @@ tbody td, thead th {
 
 .form-horizontal{
 	width: 90%;
+	align: center;
+}
+
+.jumbotron{
+	padding: 70px;
+}
+
+.nowyWsp{
+	font-style: italic;
+}
+
+.test {
+  width: 70%;
+  padding-left: 25%;
+  display:inline-block;
+  overflow: auto;
+  white-space: nowrap;
 }
