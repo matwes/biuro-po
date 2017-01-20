@@ -22,30 +22,24 @@ $funkcje = new Funkcje();
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<meta charset="utf-8">
 		<title>Profil współpracownika</title>
+		<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="src/miniPopup.js"></script>
 	</head>
 	<body>
 		<div class="container">
 			<div class="jumbotron">
-			
-
 				<div class="row" style="width: 80%;">
+				<h1 style="margin-top:0px;"><?php echo $nazwa ?></h1>
 					<div class="span6">
 						<div class="nonboxy-widget">
 							<div class="widget-head">
-								<h3>Profil współpracownika</h3>
+								<h3>Dane osoby kontaktowej</h3>
 							</div>
 							<div class="widget-content">
 								<div class="widget-box">
 									<div class = 'form-horizontal well'>
 										<fieldset>
 											<div class="control-group">
-												<div>
-													<label for="firma" class="col-sm-2 control-label">Nazwa firmy</label>
-														<div class="col-sm-10">
-															<p class="nowyWsp"><?php echo $nazwa ?></p>
-														</div>
-												</div>
-												<br>
 												<div>
 													<label for="imie" class="col-sm-2 control-label">Imię</label>
 														<div class="col-sm-10">
@@ -109,15 +103,15 @@ $funkcje = new Funkcje();
 					
 					<div style="width:100%; margin: 0 auto;">
 						<div style='float: left;'>
-							<button onClick="#" type="button" class="btn btn-primary btn-lg pull-right">Powrót do listy współpracowników</button>
+							<button onClick="location.href = 'index.php';" type="button" class="btn btn-primary btn-lg pull-right">Powrót do listy współpracowników</button>
 						</div>
 						<div style='float: right;'>
 							<ul class="nav navbar-nav" >
 								<li class="root">
 									<button type="button" class="btn btn-primary btn-lg pull-right">Dodaj usługę</button>
 									<ul class="dropdown-menu" style="min-width: 140px;">
-										<li><a href="#">Nocleg</a></li>
-										<li> <a tabindex="-1" href="#">Przejazd</a></li>
+										<li><input type="Button" class="ShowDemo btn btn-default" style="width:97%; margin: 2px;" value="Nocleg" /></li>
+										<li><input type="Button" class="ShowDemo btn btn-default" style="width:97%; margin: 2px;" value="Przejazd" /></li>
 									</ul>
 								</li>
 							</ul>
@@ -126,8 +120,75 @@ $funkcje = new Funkcje();
 				</div><br/><br/>
 			</div>
 			<br/><br/>
-		</div>
 
+  
+    <div class="mini-popup">
+        <div class="mini-popup-header">
+            <div class="mini-popup-buttons mini-popup-close  close" title="Close"></div>
+        </div>
+        <div class="mini-popup-content">
+            <h4 align="center">Dodawanie usługi transportowej</h4>
+			<div class="form-group">
+				<label for="sel1">Typ środka lokomocji:</label>
+				<select class="form-control" id="sel1">
+					<option>Samolot</option>
+					<option>Autobus</option>
+					<option>Statek</option>
+				</select>
+				<br/>
+				<label for="miejsca">Dostępna liczba miejsc:</label>
+				<input type="number" class="form-control" id="miejsca">
+		  </div>
+        </div>
+        <div class="mini-popup-footer">
+            <div class="confirm">
+                <div class="mini-popup-buttons confirm-btn">
+                    <input type="button" class="confirmbtn" value="Zatwierdź" />
+                    <span class="mini-popup-buttons confirm-left"></span>
+                </div>
+            </div>
+            <div class="cancel">
+                <div class="mini-popup-buttons cancel-btn">
+                    <input type="button" class="cancelbtn" value="Anuluj" />
+                    <span class="mini-popup-buttons cancel-left"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    $(function() {
+
+        var popup = $('.mini-popup').miniPopup({
+            beforeOpen: function() {
+                console.log('The miniPopup beforeOpen.');
+            },
+            beforeClose: function() {
+                console.log('The miniPopup beforeClose');
+            }
+        });
+        
+        $('.ShowDemo').click(function() {
+            popup.miniPopup('open');
+        });
+
+    });
+    </script>
+</div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+		
 	</body>
 	
 </html>
