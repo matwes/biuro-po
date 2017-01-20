@@ -88,7 +88,7 @@ class Funkcje
 	   if(isset($post[$zmienna])){
              $wartosc = $post[$zmienna];
 	   }
-	   echo $wartosc;
+	   return $wartosc;
 	}
 
 
