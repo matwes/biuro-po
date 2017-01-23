@@ -34,15 +34,15 @@ PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 
-if(!$conn->query("CREATE TABLE `Cel podrozy` (ID int(10) NOT NULL AUTO_INCREMENT, Kraj varchar(255) NOT NULL, Miasto varchar(255) NOT NULL UNIQUE, KrajID int(10) NOT NULL, PRIMARY KEY (ID));") === TRUE){
+if(!$conn->query("CREATE TABLE `Cel podrozy` (ID int(10) NOT NULL AUTO_INCREMENT, Miasto varchar(255) NOT NULL UNIQUE, KrajID int(10) NOT NULL, PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 
-if(!$conn->query("CREATE TABLE `Usluga przejazd` (ID int(10) NOT NULL AUTO_INCREMENT, Typ int(10) NOT NULL, Miejsca int(10) NOT NULL, PRIMARY KEY (ID));") === TRUE){
+if(!$conn->query("CREATE TABLE `Usluga przejazd` (ID int(10) NOT NULL AUTO_INCREMENT, Typ int(10) NOT NULL, Miejsca int(10) NOT NULL, WspolpracownikID int(10) NOT NULL, PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 
-if(!$conn->query("CREATE TABLE `Usluga nocleg` (ID int(10) NOT NULL AUTO_INCREMENT, Standard int(10) NOT NULL, `Cel podrozyID` int(10) NOT NULL, PRIMARY KEY (ID));") === TRUE){
+if(!$conn->query("CREATE TABLE `Usluga nocleg` (ID int(10) NOT NULL AUTO_INCREMENT, Standard int(10) NOT NULL, `Cel podrozyID` int(10) NOT NULL, WspolpracownikID int(10) NOT NULL, PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 
@@ -122,5 +122,18 @@ if(!$conn->query("ALTER TABLE `Zapytanie o przejazd` ADD INDEX `FK Zapytanie5267
 if(!$conn->query("ALTER TABLE `Usluga nocleg` ADD INDEX `FKUsluga noc656217` (`Cel podrozyID`), ADD CONSTRAINT `FKUsluga noc656217` FOREIGN KEY (`Cel podrozyID`) REFERENCES `Cel podrozy` (ID);") === TRUE){
   die($conn->error);
 }
+
+if(!$conn->query("ALTER TABLE `Usluga nocleg` ADD INDEX `FKWspolpracownik01` (`WspolpracownikID`), ADD CONSTRAINT `FKWspolpracownik01` FOREIGN KEY (`WspolpracownikID`) REFERENCES `Wspolpracownik` (ID);") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("ALTER TABLE `Usluga przejazd` ADD INDEX `FKWspolpracownik02` (`WspolpracownikID`), ADD CONSTRAINT `FKWspolpracownik02` FOREIGN KEY (`WspolpracownikID`) REFERENCES `Wspolpracownik` (ID);") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("ALTER TABLE `Cel podrozy` ADD INDEX `FKKraj` (`KrajID`), ADD CONSTRAINT `FKKraj` FOREIGN KEY (`KrajID`) REFERENCES `Kraj` (ID);") === TRUE){
+  die($conn->error);
+}
+
 $conn->close();
 ?>
