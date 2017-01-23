@@ -54,11 +54,11 @@ if(!$conn->query("CREATE TABLE `Usluga nocleg_Wyjazd` (`Usluga noclegID` int(10)
   die($conn->error);
 }
 
-if(!$conn->query("CREATE TABLE `Wspolpracownik_ Zapytanie o przejazd` (ID int(10) NOT NULL AUTO_INCREMENT, WspolpracownikID int(10) NOT NULL, `Zapytanie o przejazdID` int(10) NOT NULL, Data date NOT NULL, PRIMARY KEY (ID));") === TRUE){
+if(!$conn->query("CREATE TABLE `Wspolpracownik_ Zapytanie o przejazd` (ID int(10) NOT NULL AUTO_INCREMENT, WspolpracownikID int(10) NOT NULL, `Zapytanie o przejazdID` int(10) NOT NULL, Data date, Zaakceptowane TINYINT(1) DEFAULT '0', PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 
-if(!$conn->query("CREATE TABLE `Zapytanie o nocleg_Wspolpracownik` (ID int(10) NOT NULL AUTO_INCREMENT, `Zapytanie o noclegID` int(10) NOT NULL, WspolpracownikID int(10) NOT NULL, Data date NOT NULL, PRIMARY KEY (ID));") === TRUE){
+if(!$conn->query("CREATE TABLE `Zapytanie o nocleg_Wspolpracownik` (ID int(10) NOT NULL AUTO_INCREMENT, `Zapytanie o noclegID` int(10) NOT NULL, WspolpracownikID int(10) NOT NULL, Data date, Zaakceptowane TINYINT(1) DEFAULT '0', PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 
