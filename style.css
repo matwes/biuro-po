@@ -1,3 +1,5 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
 .container{
 	margin-top: 2%;
 }
@@ -29,11 +31,11 @@ tbody td, thead th {
     float: left;
 }
 
-td:hover {
+.container .table tbody tr:hover {
     background-color: #337ab7;
 }
 
-td:hover .nazwyF{
+tr:hover .nazwyF{
     color: white;
 }
 
@@ -98,131 +100,96 @@ td:hover .nazwyF{
 
 
 
-
-
-.mini-popup-mask {
-  position: absolute;
-  z-index: 9998;
-  top: 0px;
-  left: 0px;
-  background-color: #000000;
-  display: none;
-  width: 100%;
-  height: 100%;
-  filter: alpha(opacity=70);
-  opacity: 0.7;
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
 
-.mini-popup {
-  position: absolute;
-  z-index: 9999;
-  width: 495px;
-  height: auto;
-  background: #fff;
-  overflow: hidden;
-  padding: 15px 0 35px 0;
-  display: none;
-  font-size: 12px;
+/* Modal Content */
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    width: 30%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
 }
 
-.mini-popup-buttons {
-  background: url(images/popup-buttons.png) no-repeat;
-  display: inline-block;
+/* Add Animation */
+@-webkit-keyframes animatetop {
+    from {top:-300px; opacity:0} 
+    to {top:0; opacity:1}
 }
 
-*+html .mini-popup-buttons { display: inline; }
-
-.mini-popup-header {
-  height: 13px;
-  clear: both;
+@keyframes animatetop {
+    from {top:-300px; opacity:0}
+    to {top:0; opacity:1}
 }
 
-.mini-popup-close {
-  float: right;
-  width: 13px;
-  height: 13px;
-  margin-right: 16px;
-  cursor: pointer;
-  background-position: 0 -80px;
+.modal-header {
+    padding: 2px 16px;
+    background-color: rgb(238, 238, 238);
+    color: rgb(51, 51, 51);
 }
 
-.mini-popup-content {
-  margin: 0 35px 0 45px;
-  padding-bottom: 32px;
-  border-bottom: 1px solid #858585;
-  color: #<a href="http://www.jqueryscript.net/tags.php?/3D/">3D</a>4550;
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+    padding: 2px 16px;
+    background-color: rgb(238, 238, 238);
+    color: white;
 }
 
-.mini-popup-content p {
-  margin: 15px 0 0 0;
-  line-height: 18px;
-}
 
-.mini-popup-footer {
-  margin: 25px 45px 0 45px;
-  height: 35px;
-}
 
-.confirm {
-  float: left;
-  height: 35px;
-  overflow: hidden;
-}
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
 
-.confirm-btn {
-  background-position: 100% 0;
-  display: inline-block;
-  height: 35px;
-  position: relative;
-  cursor: pointer;
-  margin-left: 7px;
-}
+/****** Style Star Rating Widget *****/
 
-*+html .confirm-btn { display: inline; }
-
-.confirm-btn input,
-.cancel-btn input {
-  background: none;
+.rating { 
   border: none;
-  font-weight: bold;
-  margin: 0;
-  padding: 9px 15px 12px 8px;
-  cursor: pointer;
-  overflow: visible;
-  width: auto;
-  height: 35px;
-  outline: none;
-}
-
-.confirm-btn .confirmbtn { color: #fff; }
-
-.confirm-btn span,
-.cancel-btn span {
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: -7px;
-  width: 7px;
-}
-
-.confirm-btn span.confirm-left { background-position: 0 0; }
-
-.cancel-btn span.cancel-left { background-position: 0 -40px; }
-
-.cancel {
   float: left;
-  height: 35px;
-  margin-left: 20px;
 }
 
-.cancel-btn {
-  background-position: 100% -40px;
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 1.75em;
+  font-family: FontAwesome;
   display: inline-block;
-  height: 35px;
-  position: relative;
-  cursor: pointer;
+  content: "\f005";
 }
 
-*+html .cancel-btn { display: inline; }
 
-.cancel-btn .cancelbtn { color: #333333; }
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
