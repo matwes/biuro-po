@@ -54,7 +54,7 @@ if(!$conn->query("CREATE TABLE `Usluga nocleg_Wyjazd` (`Usluga noclegID` int(10)
   die($conn->error);
 }
 
-if(!$conn->query("CREATE TABLE `Wspolpracownik_ Zapytanie o przejazd` (WspolpracownikID int(10) NOT NULL, `Zapytanie o przejazdID` int(10) NOT NULL, Data date NOT NULL, PRIMARY KEY (WspolpracownikID, `Zapytanie o przejazdID`));") === TRUE){
+if(!$conn->query("CREATE TABLE `Wspolpracownik_ Zapytanie o przejazd` (ID int(10) NOT NULL AUTO_INCREMENT, WspolpracownikID int(10) NOT NULL, `Zapytanie o przejazdID` int(10) NOT NULL, Data date NOT NULL, PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 

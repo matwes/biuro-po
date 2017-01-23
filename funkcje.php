@@ -158,8 +158,7 @@ class Funkcje
             $final_result = $conn->query($sql2);
   	      if(mysqli_num_rows($final_result) > 0){
                 while($row = $final_result->fetch_assoc()){
-		  echo $id;
-                  $sql3 = "INSERT INTO `zapytanie o nocleg_wspolpracownik` (`Zapytanie o noclegID`, WspolpracownikID, Data) VALUES('{$id}', '{$row['ID']}', NOW())";
+                  $sql3 = "INSERT INTO `zapytanie o nocleg_wspolpracownik` (`Zapytanie o noclegID`, WspolpracownikID) VALUES('{$id}', '{$row['ID']}')";
     	          if(!$conn->query($sql3) === TRUE){
 		    die($conn->error);
     	          } 
@@ -167,6 +166,32 @@ class Funkcje
               }
         }
      }	
+
+     public function rozeslijZapytaniePrzejazd($id){
+      
+        $conn = $this->zaladujBaze();
+	$sql = "SELECT * FROM `zapytanie o przejazd` WHERE ID = {$id}";
+	$result = $conn->query($sql);
+	if(mysqli_num_rows($result) > 0){
+            $row = $result->fetch_assoc();
+            $sql2 = "SELECT wspolpracownik.ID 
+            FROM wspolpracownik
+            INNER JOIN `usluga przejazd`
+            ON wspolpracownik.ID = `usluga przejazd`.`WspolpracownikID`
+            WHERE `usluga przejazd`.`Miejsca` >= {$row['Miejsca']} AND `usluga przejazd`.Typ = {$row['Typ']}";
+            $final_result = $conn->query($sql2);
+  	      if(mysqli_num_rows($final_result) > 0){
+                while($row = $final_result->fetch_assoc()){
+                  $sql3 = "INSERT INTO `wspolpracownik_ zapytanie o przejazd` (`Zapytanie o przejazdID`, WspolpracownikID) VALUES('{$id}', '{$row['ID']}')";
+    	          if(!$conn->query($sql3) === TRUE){
+		    die($conn->error);
+    	          } 
+                } 
+              }
+        }
+     }	
+
+
 
 }
 

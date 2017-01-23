@@ -154,6 +154,19 @@ if(!$conn->query("INSERT INTO `zapytanie o nocleg` (Start, Koniec, Miejsca, Stan
   die($conn->error);
 }
 
+
+if(!$conn->query("INSERT INTO `zapytanie o przejazd` (Start, Koniec, Miejsca, Typ, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '30', '1', '1')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `zapytanie o przejazd` (Start, Koniec, Miejsca, Typ, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '30', '2', '1')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `zapytanie o przejazd` (Start, Koniec, Miejsca, Typ, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '60', '1', '1')") === TRUE){
+  die($conn->error);
+}
+
 #Rozsyłanie zapytań do współpracowników
 require_once 'funkcje.php';
 $funkcje = new Funkcje();
@@ -161,4 +174,8 @@ $funkcje->rozeslijZapytanieNocleg("1");
 $funkcje->rozeslijZapytanieNocleg("2");
 $funkcje->rozeslijZapytanieNocleg("3");
 
+
+$funkcje->rozeslijZapytaniePrzejazd("1");
+$funkcje->rozeslijZapytaniePrzejazd("2");
+$funkcje->rozeslijZapytaniePrzejazd("3");
 ?>
