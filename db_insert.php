@@ -81,7 +81,9 @@ if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Strasburg',
 if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('4','1','4')") === TRUE){
   die($conn->error);
 }
-
+if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('4','1','4')") === TRUE){
+  die($conn->error);
+}
 if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('5','1','4')") === TRUE){
   die($conn->error);
 }
@@ -102,6 +104,13 @@ if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, Wspolp
   die($conn->error);
 }
 
+if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('4','1','5')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('3','1','4')") === TRUE){
+  die($conn->error);
+}
 #Dodawanie uslug przewoznikow
 #Typy 1-samolot, 2-autobus, 3-pociąg
 if(!$conn->query("INSERT INTO `usluga przejazd` (Typ, Miejsca, WspolpracownikID) VALUES('1', '55', '1')") === TRUE){
@@ -131,4 +140,25 @@ if(!$conn->query("INSERT INTO `usluga przejazd` (Typ, Miejsca, WspolpracownikID)
 if(!$conn->query("INSERT INTO `usluga przejazd` (Typ, Miejsca, WspolpracownikID) VALUES('1', '88', '2')") === TRUE){
   die($conn->error);
 }
+
+#Dodawanie zapytań
+if(!$conn->query("INSERT INTO `zapytanie o nocleg` (Start, Koniec, Miejsca, Standard, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '30', '4', '1')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `zapytanie o nocleg` (Start, Koniec, Miejsca, Standard, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '30', '5', '1')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `zapytanie o nocleg` (Start, Koniec, Miejsca, Standard, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '30', '4', '5')") === TRUE){
+  die($conn->error);
+}
+
+#Rozsyłanie zapytań do współpracowników
+require_once 'funkcje.php';
+$funkcje = new Funkcje();
+$funkcje->rozeslijZapytanieNocleg("1");
+$funkcje->rozeslijZapytanieNocleg("2");
+$funkcje->rozeslijZapytanieNocleg("3");
+
 ?>

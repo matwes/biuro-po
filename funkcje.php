@@ -119,6 +119,55 @@ class Funkcje
         return $randomString;
       } 
     
+      public function pobierzZapytania()
+	{
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT Nazwa, ID FROM wspolpracownik";
+		$result = $conn->query($sql);
+		
+		$i = 0;
+		while($row = $result->fetch_assoc())
+		{
+			$id = $row['ID'];
+			echo "<tr><td><a class='nazwyF' href='profil.php?id={$id}'>".$row['Nazwa']."</a></td></tr>";
+			$i = $i + 1;
+		}
+		
+		while($i < 7)
+		{
+			echo "<tr><td></td></tr>";
+			$i = $i + 1;
+		}
+		
+		return $i;
+	}
+
+
+     public function rozeslijZapytanieNocleg($id){
+      
+        $conn = $this->zaladujBaze();
+	$sql = "SELECT * FROM `zapytanie o nocleg` WHERE ID = {$id}";
+	$result = $conn->query($sql);
+	if(mysqli_num_rows($result) > 0){
+            $row = $result->fetch_assoc();
+            $sql2 = "SELECT wspolpracownik.ID 
+            FROM wspolpracownik
+            INNER JOIN `usluga nocleg`
+            ON wspolpracownik.ID = `usluga nocleg`.`WspolpracownikID`
+            WHERE `usluga nocleg`.`Standard` = {$row['Standard']} AND `usluga nocleg`.`Cel podrozyID` = {$row['Cel podrozyID']}";
+            $final_result = $conn->query($sql2);
+  	      if(mysqli_num_rows($final_result) > 0){
+                while($row = $final_result->fetch_assoc()){
+		  echo $id;
+                  $sql3 = "INSERT INTO `zapytanie o nocleg_wspolpracownik` (`Zapytanie o noclegID`, WspolpracownikID, Data) VALUES('{$id}', '{$row['ID']}', NOW())";
+    	          if(!$conn->query($sql3) === TRUE){
+		    die($conn->error);
+    	          } 
+                } 
+              }
+        }
+     }	
+
 }
 
 ?>	
