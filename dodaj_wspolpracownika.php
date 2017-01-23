@@ -1,4 +1,8 @@
 <?php
+require_once 'funkcje.php';
+
+$funkcje = new Funkcje();
+
 $servername = "localhost";
 $username = "root";
 $password = "pass";
@@ -16,7 +20,10 @@ if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
 
-if(!$conn->query("INSERT INTO wspolpracownik (Nazwa, Imie, Nazwisko, Telefon, Email, Login, Haslo) VALUES('{$_SESSION["firma"]}','{$_SESSION["imie"]}','{$_SESSION["nazw"]}', '{$_SESSION["tel"]}', '{$_SESSION["email"]}', 'login7', 'haslo6')") === TRUE){
+$login = $funkcje->generujStringa(10);
+$haslo = $funkcje->generujStringa(15);
+
+if(!$conn->query("INSERT INTO wspolpracownik (Nazwa, Imie, Nazwisko, Telefon, Email, Login, Haslo) VALUES('{$_SESSION["firma"]}','{$_SESSION["imie"]}','{$_SESSION["nazw"]}', '{$_SESSION["tel"]}', '{$_SESSION["email"]}', '{$login}', '{$haslo}')") === TRUE){
   die($conn->error);
 }
 unset($_SESSION['firma']); 
