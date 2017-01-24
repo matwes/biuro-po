@@ -22,6 +22,25 @@ $funkcje = new Funkcje();
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<meta charset="utf-8">
 		<title>Profil współpracownika</title>
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $('#ctrSelect').change(function() {
+                    var wybor = $(this).val();
+					//alert('You picked: ' + sel_stud);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "miasta.php",
+                        data: {'theOption': wybor},
+                        success: function(whatigot) {
+
+                            $('#LaDIV').html(whatigot);
+                        } 
+                    }); 
+                }); 
+            });
+        </script>
 	</head>
 	<body>
 		<div class="container">
@@ -84,18 +103,7 @@ $funkcje = new Funkcje();
 							</tr>
 						</thead>
 						<tbody style="height:120px;">
-							<tr>
-								<td style="width:80%;"><a class="nazwyF" href="#">Hotel Marigold</a></td>
-								<td style="width:20%;"><span class="nazwyF">Hotelowa</span></td>
-							</tr>
-							<tr>
-								<td style="width:80%;"><a class="nazwyF" href="#">Hotel Marigold</a></td>
-								<td style="width:20%;"><span class="nazwyF">Hotelowa</span></td>
-							</tr>
-							<tr>
-								<td style="width:80%;"><a class="nazwyF" href="#">Hotel Marigold</a></td>
-								<td style="width:20%;"><span class="nazwyF">Hotelowa</span></td>
-							</tr>
+							<?php $funkcje->pobierzUslugi($id); ?>
 						</tbody>
 					</table>
 					
@@ -126,27 +134,19 @@ $funkcje = new Funkcje();
 						</div>
 						<div class="modal-body">
 							 <div class="form-group">
-								<label for="sel1">Kraj:</label>
-								<select class="form-control" id="sel1">
-									<option>Francja</option>
-									<option>Gruzja</option>
-									<option>Azerbejdżan</option>
-									<option>Estonia</option>
+								<label for="ctrSelect">Kraj:</label>
+								<select class="form-control" id="ctrSelect">
+									<?php $funkcje->pobierzKraje(); ?>
 								</select><br>
-								<label for="sel2">Miasto:</label>
-								<select class="form-control" id="sel1">
-									<option>Paryż</option>
-									<option>Marsylia</option>
-									<option>La Baule</option>
-									<option>Angers</option>
-								</select>
+								<div id="LaDIV"></div>
+		
 								<br><label for="stars">Standard:</label><br>
 								<fieldset class="rating" id="stars">
 									<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
 									<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
 									<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
 									<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-									<input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+									<input type="radio" id="star1" name="rating" value="1" checked="checked"/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
 								</fieldset><br>
 							</div>
 						</div>
@@ -156,7 +156,7 @@ $funkcje = new Funkcje();
 									<button id="anulujBtn" type="button" class="btn btn-primary btn-lg pull-right">Anuluj</button>
 								</div>
 								<div style='float: right;'>
-									<button type="button" class="btn btn-primary btn-lg pull-right">Dodaj usługę</button>
+									<button id="btn" class="btn btn-primary btn-lg pull-right">Dodaj usługę</button>
 								</div>
 							</div>
 						</div>
@@ -173,13 +173,14 @@ $funkcje = new Funkcje();
 						<div class="modal-body">
 							<div class="form-group">
 								<label for="sel1">Typ środka lokomocji:</label>
-								<select class="form-control" id="sel1">
-									<option>Samolot</option>
-									<option>Autobus</option>
-									<option>Statek</option>
+								<select class="form-control" id="locSelect">
+									<option value="1">Samolot</option>
+									<option value="2">Autobus</option>
+									<option value="3">Statek</option>
 								</select><br>
+								<div id="seatsError" style="color: red;"></div>
 								<label for="seats">Dostępna liczba miejsc:</label>
-								<input type="text" class="form-control bfh-number" id="seats">
+								<input type="text" class="form-control bfh-number" id="seats">		
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -188,7 +189,7 @@ $funkcje = new Funkcje();
 									<button id="anulujBtn2" type="button" class="btn btn-primary btn-lg pull-right">Anuluj</button>
 								</div>
 								<div style='float: right;'>
-									<button type="button" class="btn btn-primary btn-lg pull-right">Dodaj usługę</button>
+									<button id="btn2" type="button" class="btn btn-primary btn-lg pull-right">Dodaj usługę</button>
 								</div>
 							</div>
 						</div>
@@ -197,7 +198,7 @@ $funkcje = new Funkcje();
 				</div>	
 				<br><br>
 			</div><!--jumbotron-->
-			<br><br>
+			<br><br>	
 		</div><!--container-->
 
 		<script>
@@ -214,9 +215,51 @@ $funkcje = new Funkcje();
 		// When the user clicks the button, open the modal 
 		btn.onclick = function() {
 			modal.style.display = "block";
+				$.ajax({
+					type: "POST",
+					url: "miasta.php",
+					data: {'theOption': $('#ctrSelect').val()},
+					success: function(whatigot) {
+
+						$('#LaDIV').html(whatigot);
+						$('#btn').click(function() {
+							
+							var modal = document.getElementById('myModal');
+							$.ajax({
+								type: "POST",
+								url: "dodaj_usluge.php",
+								data: {'wspId': <?php echo $id; ?>, 'miasto': $('#ctySelect').val(), 'stand': $("#stars :radio:checked").val()},
+								success: function(whatigot) {
+										modal.style.display = "none";
+										window.location.reload();											
+							  }
+							});
+							
+						});
+					} 
+				});
 		}
 		btn2.onclick = function() {
 			modal2.style.display = "block";
+				$('#btn2').click(function() {
+					
+					var modal2 = document.getElementById('myModal2');
+					$.ajax({
+						type: "POST",
+						url: "dodaj_usluge2.php",
+						data: {'wspId': <?php echo $id; ?>, 'lok': $('#locSelect').val(), 'seats': $("#seats").val()},
+						success: function(whatigot) {
+							if(whatigot.length>0)
+								$('#seatsError').html(whatigot);
+							else
+							{
+								modal.style.display = "none";
+								window.location.reload();		
+							}								
+					  }
+					});
+					
+				});
 		}
 		btn3.onclick = function() {
 			modal.style.display = "none";
@@ -236,7 +279,7 @@ $funkcje = new Funkcje();
 			
 		}
 		</script>
-		
+
 		
 	</body>
 </html>
