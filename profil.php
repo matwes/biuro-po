@@ -102,7 +102,7 @@ $funkcje = new Funkcje();
 								<th style="width:20%;">Typ usługi</th>
 							</tr>
 						</thead>
-						<tbody style="height:120px;">
+						<tbody style="height:175px;">
 							<?php $funkcje->pobierzUslugi($id); ?>
 						</tbody>
 					</table>

@@ -230,24 +230,69 @@ class Funkcje
       public function pobierzZapytania()
 	{
 		$conn = $this->zaladujBaze();
-		$sql = "SELECT Nazwa, ID FROM wspolpracownik";
+		$sql = "SELECT * FROM `zapytanie o nocleg`";
 		$result = $conn->query($sql);
 		
-		$i = 0;
 		while($row = $result->fetch_assoc())
 		{
 			$id = $row['ID'];
-			echo "<tr><td><a class='nazwyF' href='profil.php?id={$id}'>".$row['Nazwa']."</a></td></tr>";
-			$i = $i + 1;
+			echo "<div class = 'form-horizontal well'><p style='font-size:15px;'>Zapytanie o nocleg w {$this->pobierzCelPodrozy($row['Cel podrozyID'])}, w okresie: <b>{$row['Start']}</b> - <b>{$row['Koniec']}</b>, potrzebnych miejsc:
+			<b>{$row['Miejsca']}</b>, wymagany standard: <b>{$row['Standard']}</b></p>
+				<div style='display: inline-block;'>{$this->pobierzOdpowiedzi($id, 1)}</div>								
+									</div>";
 		}
 		
-		while($i < 7)
+		$sql = "SELECT * FROM `zapytanie o przejazd`";
+		$result = $conn->query($sql);
+		
+		while($row = $result->fetch_assoc())
 		{
-			echo "<tr><td></td></tr>";
-			$i = $i + 1;
+			switch ($row['Typ']) {
+				case 1:
+					$lok = 'Samolot';
+					break;
+				case 2:
+					$lok = 'Autobus';
+					break;
+				case 3:
+					$lok = 'Statek';
+					break;
+			}
+			
+			$id = $row['ID'];
+			echo "<div class = 'form-horizontal well'><p style='font-size:15px;'>Zapytanie o przejazd do {$this->pobierzCelPodrozy($row['Cel podrozyID'])}, w okresie: <b>{$row['Start']}</b> - <b>{$row['Koniec']}</b>, potrzebnych miejsc:
+		<b>{$row['Miejsca']}</b>, środek transportu: <b>{$lok}</b></p>
+				<div style='display: inline-block;'>{$this->pobierzOdpowiedzi($id, 2)}</div>							
+									</div>";
 		}
 		
-		return $i;
+		return $result;
+	}
+	
+	 public function pobierzOdpowiedzi($id, $typ)
+	{
+		$conn = $this->zaladujBaze();
+		if($typ==1)
+			$sql = "SELECT * FROM `zapytanie o nocleg_wspolpracownik` WHERE `Zapytanie o noclegID`={$id}";
+		else
+			$sql = "SELECT * FROM `wspolpracownik_ zapytanie o przejazd` WHERE `Zapytanie o przejazdID`={$id}";
+		
+		$result = $conn->query($sql);
+		$dane = "";
+		
+		while($row = $result->fetch_assoc())
+		{
+			$idW = $row['WspolpracownikID'];
+			$dane = $dane . "<div style='float:left; border-radius: 25px; background-color: rgb(238, 238, 238); border: 2px solid #73AD21; margin: 5px 30px; padding: 20px; width: 220px; height: 100px;'>{$this->pobierzDane($idW, 'Nazwa')}<br>";
+			if($row['Data']==NULL)
+				$dane = $dane."<p style='font-size:13px;'>Oczekiwanie na odpowiedź</p></div>";
+			else if($row['Zaakceptowane']==0)
+				$dane = $dane."<p style='color:red; font-size:15px;'>Propozycja odrzucona</p></div>";
+			else
+				$dane = $dane."<button type='button' class='btn btn-success' style='margin: 5px 40px;'>Zaakceptuj</button></div>";
+		}
+		
+		return $dane;
 	}
 
 
