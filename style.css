@@ -93,9 +93,8 @@ tr:hover .nazwyF{
     display: block;
 }
 
-.navbar-nav > li > .dropdown-menu {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+#zapyt:hover + .dropdown-menu{
+    display: block;
 }
 
 
