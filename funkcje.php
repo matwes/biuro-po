@@ -119,29 +119,6 @@ class Funkcje
         return $randomString;
       } 
     
-      public function pobierzZapytania()
-	{
-		$conn = $this->zaladujBaze();
-		$sql = "SELECT Nazwa, ID FROM wspolpracownik";
-		$result = $conn->query($sql);
-		
-		$i = 0;
-		while($row = $result->fetch_assoc())
-		{
-			$id = $row['ID'];
-			echo "<tr><td><a class='nazwyF' href='profil.php?id={$id}'>".$row['Nazwa']."</a></td></tr>";
-			$i = $i + 1;
-		}
-		
-		while($i < 7)
-		{
-			echo "<tr><td></td></tr>";
-			$i = $i + 1;
-		}
-		
-		return $i;
-	}
-
 
      public function rozeslijZapytanieNocleg($id){
       
@@ -191,7 +168,17 @@ class Funkcje
         }
      }	
 
-
+    public function generujListeKrajow(){
+      $conn = $this->zaladujBaze();
+      $sql = "SELECT * FROM Kraj";
+      $result = $conn->query($sql);
+      $string = "";
+      while($row = $result->fetch_assoc()){
+        $string =  $string . "<option value='" . $row['ID'] . "'>" . $row['Nazwa'] . '</option>
+';
+      }
+      return $string;
+    }
 
 }
 
