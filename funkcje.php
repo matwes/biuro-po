@@ -43,6 +43,114 @@ class Funkcje
 		return $i;
 	}
 	
+	public function pobierzUslugi($id)
+	{
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT Standard, `Cel podrozyID` FROM `usluga nocleg` WHERE WspolpracownikID = {$id}";
+		$result = $conn->query($sql);
+		
+		$i = 0;
+		while($row = $result->fetch_assoc())
+		{
+			switch ($row['Standard']) {
+				case 1:
+					$star = 'gwiazdka';
+					break;
+				case 2:
+					$star= 'gwiazdki';
+					break;
+				case 3:
+					$star = 'gwiazdki';
+					break;
+				case 4:
+					$star = 'gwiazdki';
+					break;
+				case 5:
+					$star = 'gwiazdek';
+					break;
+			}
+			echo "<tr><td style='width:80%;'><span class='nazwyF'>".$this->pobierzCelPodrozy($row['Cel podrozyID'])." - <i>".$row['Standard']." {$star}</i></span></td>
+								<td style='width:20%;'><span class='nazwyF'>Noclegowa</span></td></tr>";
+			$i = $i + 1;
+		}
+		
+		
+		$sql = "SELECT Typ, Miejsca FROM `usluga przejazd` WHERE WspolpracownikID = {$id}";
+		$result = $conn->query($sql);
+		while($row = $result->fetch_assoc())
+		{
+			switch ($row['Typ']) {
+				case 1:
+					$lok = 'Samolot';
+					break;
+				case 2:
+					$lok = 'Autobus';
+					break;
+				case 3:
+					$lok = 'Statek';
+					break;
+			}
+			echo "<tr><td style='width:80%;'><span class='nazwyF'>".$lok." - <i>".$row['Miejsca']." miejsc</i></span></td>
+								<td style='width:20%;'><span class='nazwyF'>Przejazdowa</span></td></tr>";
+			$i = $i + 1;
+		}
+		
+		while($i < 3)
+		{
+			echo "<tr><td></td></tr>";
+			$i = $i + 1;
+		}
+		
+		return $i;
+	}
+	
+	public function pobierzCelPodrozy($id)
+	{
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT Miasto, KrajID FROM `cel podrozy` WHERE ID={$id}";
+		$result = $conn->query($sql);
+		
+		
+		$row = $result->fetch_assoc();
+		$cel=$this->pobierzKraj($row['KrajID']);
+		$cel = "<b>".$cel ."</b> - ". $row['Miasto'];
+		
+		
+		return $cel;
+	}
+	
+	public function pobierzKraj($id)
+	{
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT Nazwa FROM `kraj` WHERE ID = {$id}";
+		$result = $conn->query($sql);
+		
+		$row = $result->fetch_assoc();
+		$kraj=$row['Nazwa'];
+		
+		return $kraj;
+	}
+	
+	public function pobierzKraje()
+	{
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT Nazwa, ID FROM `kraj`";
+		$result = $conn->query($sql);
+		
+		$i  = 1;
+		while($row = $result->fetch_assoc())
+		{
+			if($i == 1){
+				echo "<option selected='selected' value={$row['ID']}>{$row['Nazwa']}</option>";
+				$i=0;
+			}
+			else
+				echo "<option value={$row['ID']}>{$row['Nazwa']}</option>";
+		}
+		
+		return $i;
+	}
+	
 	public function pobierzDane($id, $atr){
 		 $conn = $this->zaladujBaze();
 		 $sql = "SELECT {$atr} FROM wspolpracownik WHERE ID = {$id};";
@@ -119,6 +227,74 @@ class Funkcje
         return $randomString;
       } 
     
+      public function pobierzZapytania()
+	{
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT * FROM `zapytanie o nocleg`";
+		$result = $conn->query($sql);
+		
+		while($row = $result->fetch_assoc())
+		{
+			$id = $row['ID'];
+			echo "<div class = 'form-horizontal well'><p style='font-size:15px;'>Zapytanie o nocleg w {$this->pobierzCelPodrozy($row['Cel podrozyID'])}, w okresie: <b>{$row['Start']}</b> - <b>{$row['Koniec']}</b>, potrzebnych miejsc:
+			<b>{$row['Miejsca']}</b>, wymagany standard: <b>{$row['Standard']}</b></p>
+				<div style='display: inline-block;'>{$this->pobierzOdpowiedzi($id, 1)}</div>								
+									</div>";
+		}
+		
+		$sql = "SELECT * FROM `zapytanie o przejazd`";
+		$result = $conn->query($sql);
+		
+		while($row = $result->fetch_assoc())
+		{
+			switch ($row['Typ']) {
+				case 1:
+					$lok = 'Samolot';
+					break;
+				case 2:
+					$lok = 'Autobus';
+					break;
+				case 3:
+					$lok = 'Statek';
+					break;
+			}
+			
+			$id = $row['ID'];
+			echo "<div class = 'form-horizontal well'><p style='font-size:15px;'>Zapytanie o przejazd do {$this->pobierzCelPodrozy($row['Cel podrozyID'])}, w okresie: <b>{$row['Start']}</b> - <b>{$row['Koniec']}</b>, potrzebnych miejsc:
+		<b>{$row['Miejsca']}</b>, środek transportu: <b>{$lok}</b></p>
+				<div style='display: inline-block;'>{$this->pobierzOdpowiedzi($id, 2)}</div>							
+									</div>";
+		}
+		
+		return $result;
+	}
+	
+	 public function pobierzOdpowiedzi($id, $typ)
+	{
+		$conn = $this->zaladujBaze();
+		if($typ==1)
+			$sql = "SELECT * FROM `zapytanie o nocleg_wspolpracownik` WHERE `Zapytanie o noclegID`={$id}";
+		else
+			$sql = "SELECT * FROM `wspolpracownik_ zapytanie o przejazd` WHERE `Zapytanie o przejazdID`={$id}";
+		
+		$result = $conn->query($sql);
+		$dane = "";
+		
+		while($row = $result->fetch_assoc())
+		{
+			$idW = $row['WspolpracownikID'];
+			$dane = $dane . "<div style='float:left; border-radius: 25px; background-color: rgb(238, 238, 238); border: 2px solid #73AD21; margin: 5px 30px; padding: 20px; width: 220px; height: 100px;'>{$this->pobierzDane($idW, 'Nazwa')}<br>";
+			if($row['Data']==NULL)
+				$dane = $dane."<p style='font-size:13px;'>Oczekiwanie na odpowiedź</p></div>";
+			else if($row['Zaakceptowane']==0)
+				$dane = $dane."<p style='color:red; font-size:15px;'>Propozycja odrzucona</p></div>";
+			else
+				$dane = $dane."<button type='button' class='btn btn-success' style='margin: 5px 40px;'>Zaakceptuj</button></div>";
+		}
+		
+		return $dane;
+	}
+
 
      public function rozeslijZapytanieNocleg($id){
       
