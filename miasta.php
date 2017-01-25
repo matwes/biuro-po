@@ -1,22 +1,32 @@
 <?php
-    $server = 'localhost';
-    $login = 'root';
-    $pword = 'pass';
-    $dbname = 'biuro';
-    mysql_connect($server,$login,$pword) or die($connect_error); 
-    mysql_select_db($dbname) or die($connect_error);
+	$servername = "localhost";
+	$username = "root";
+	$password = "pass";
+
+	$conn = new mysqli($servername, $username, $password, "biuro");
+	if($conn->connect_error){
+	  die("Polącznie nie wyszlo");
+	}
+
+	if(!$conn->query("USE biuro") === TRUE){
+	  die($conn->error);
+	}
+
+	if (session_status() == PHP_SESSION_NONE) {
+		session_start();
+	}
 
     $kraj = $_POST['theOption'];
 
     $query = "SELECT * FROM `cel podrozy` WHERE `KrajID` = {$kraj}";
-    $result = mysql_query($query);
-    $num_rows_returned = mysql_num_rows($result);
+    $result = $conn->query($query);
+    $num_rows_returned = mysqli_num_rows($result);
 
-    $r = '<label for="ctySelect">Miasto:</label> <select class="form-control" id="ctySelect">';
+    $r = '<label for="ctySelect" class="col-sm-2 control-label">Miasto</label><div class="col-sm-10" id="miasta"><select class="form-control" id="ctySelect">';
 
     if ($num_rows_returned > 0)
 	{
-        while ($row = mysql_fetch_assoc($result))
+        while ($row = $result->fetch_assoc())
 		{
             $r = $r . '<option value="' .$row['ID']. '">' . $row['Miasto'] . '</option>';
         }
@@ -25,7 +35,7 @@
     }
 
 
-    $r = $r . '</select>';
+    $r = $r . '</select></div>';
 
     echo $r;
 	?>

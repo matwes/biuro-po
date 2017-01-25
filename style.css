@@ -93,9 +93,8 @@ tr:hover .nazwyF{
     display: block;
 }
 
-.navbar-nav > li > .dropdown-menu {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+#zapyt:hover + .dropdown-menu{
+    display: block;
 }
 
 
@@ -187,9 +186,9 @@ h1 { font-size: 1.5em; margin: 10px; }
 
 .rating > input:checked ~ label, /* show gold star when clicked */
 .rating:not(:checked) > label:hover, /* hover current star */
-.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+.rating:not(:checked) > label:hover ~ label { color: 	#404040;  } /* hover previous stars in list */
 
 .rating > input:checked + label:hover, /* hover current star when changing rating */
 .rating > input:checked ~ label:hover,
 .rating > label:hover ~ input:checked ~ label, /* lighten current selection */
-.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
+.rating > input:checked ~ label:hover ~ label { color: 	#404040;  } 

@@ -5,9 +5,6 @@
 	//echo "<h1>{$wspId}</h1>";
 	//echo "<h1>{$miasto}</h1>";
 	//echo "<h1>{$stand}</h1>";
-	require_once 'funkcje.php';
-
-	$funkcje = new Funkcje();
 
 	$servername = "localhost";
 	$username = "root";
