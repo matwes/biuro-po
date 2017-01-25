@@ -90,7 +90,7 @@ class Funkcje
 					$lok = 'Statek';
 					break;
 			}
-			echo "<tr><td style='width:80%;'><span class='nazwyF'>".$lok." - <i>".$row['Miejsca']." miejsc</i></span></td>
+			echo "<tr><td style='width:80%;'><span class='nazwyF'><b>".$lok."</b> - <i>".$row['Miejsca']." miejsc</i></span></td>
 								<td style='width:20%;'><span class='nazwyF'>Przejazdowa</span></td></tr>";
 			$i = $i + 1;
 		}

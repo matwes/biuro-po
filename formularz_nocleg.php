@@ -12,7 +12,6 @@ if (session_status() == PHP_SESSION_NONE) {
 	<head>
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	
 		
 		<meta charset="utf-8">
 		<title>Dodawanie nowego zapytania o usługę noclegową</title>
@@ -32,6 +31,8 @@ if (session_status() == PHP_SESSION_NONE) {
                 }); 
             });
         </script>
+		
+		 
 
 	</head>
 
@@ -68,10 +69,7 @@ if (session_status() == PHP_SESSION_NONE) {
 						
 						
 						
-						
-						
-						
-						
+
 						
 						
 						
