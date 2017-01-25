@@ -27,8 +27,6 @@ $funkcje = new Funkcje();
             $(function() {
                 $('#ctrSelect').change(function() {
                     var wybor = $(this).val();
-					//alert('You picked: ' + sel_stud);
-
                     $.ajax({
                         type: "POST",
                         url: "miasta.php",
@@ -102,7 +100,7 @@ $funkcje = new Funkcje();
 								<th style="width:20%;">Typ usługi</th>
 							</tr>
 						</thead>
-						<tbody style="height:175px;">
+						<tbody style="height:110px;">
 							<?php $funkcje->pobierzUslugi($id); ?>
 						</tbody>
 					</table>
@@ -202,17 +200,14 @@ $funkcje = new Funkcje();
 		</div><!--container-->
 
 		<script>
-		// Get the modal
 		var modal = document.getElementById('myModal');
 		var modal2 = document.getElementById('myModal2');
 
-		// Get the button that opens the modal
 		var btn = document.getElementById("noclegBtn");
 		var btn2 = document.getElementById("przyjazdBtn");
 		var btn3 = document.getElementById("anulujBtn");
 		var btn4 = document.getElementById("anulujBtn2");
 
-		// When the user clicks the button, open the modal 
 		btn.onclick = function() {
 			modal.style.display = "block";
 				$.ajax({

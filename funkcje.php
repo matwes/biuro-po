@@ -285,15 +285,20 @@ class Funkcje
 			$idW = $row['WspolpracownikID'];
 			$dane = $dane . "<div style='float:left; border-radius: 25px; background-color: rgb(238, 238, 238); border: 2px solid #73AD21; margin: 5px 30px; padding: 20px; width: 220px; height: 100px;'>{$this->pobierzDane($idW, 'Nazwa')}<br>";
 			if($row['Data']==NULL)
-				$dane = $dane."<p style='font-size:13px;'>Oczekiwanie na odpowiedź</p></div>";
+			{
+				if($row['Zaakceptowane']==0)
+					$dane = $dane."<p style='font-size:13px;'>Oczekiwanie na odpowiedź</p></div>";
+				else
+					$dane = $dane."<p style='font-size:13px;'>Oferta wybrana</p></div>";
+			}
 			else if($row['Zaakceptowane']==0)
 				$dane = $dane."<p style='color:red; font-size:15px;'>Propozycja odrzucona</p></div>";
 			else
-				$dane = $dane."<button type='button' class='btn btn-success' style='margin: 5px 40px;'>Zaakceptuj</button></div>";
+				$dane = $dane."<button onclick='akceptuj({$typ}, {$row['ID']})' type='button' class='btn btn-success' style='margin: 5px 40px;'>Zaakceptuj</button></div>";
 		}
 		
 		return $dane;
-	}
+	} 
 
 
      public function rozeslijZapytanieNocleg($id){

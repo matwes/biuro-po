@@ -13,7 +13,7 @@ $funkcje = new Funkcje();
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<meta charset="utf-8">
 		<title>Panel obsługi zapytań</title>
-
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -34,11 +34,74 @@ $funkcje = new Funkcje();
 					</div>
 				</div>
 
-
-	
-				<br><br>
-			</div><!--jumbotron-->
-			<br><br>	
+				<button type="button" class="btn btn-primary btn-lg" style="margin: 25px -100px; position:relative; top:50%; left:50%;">Stwórz nowe zapytanie</button>
+			</div><!--jumbotron-->	
 		</div><!--container-->
+		
+		<div id="myModal" class="modal">
+				  <!-- Modal content -->
+					<div class="modal-content">
+						<div class="modal-header">
+							<h2>Komunikat</h2>
+						</div>
+						<div class="modal-body">
+							 <p>Czy na pewno akceptujesz tę propozycję?</p>
+						</div>
+						<div id="test"></div>
+						<div class="modal-footer">
+							<div style="width:100%; margin: 0 auto;">
+								<div style='float: left;'>
+									<button id="anulujBtn" type="button" class="btn btn-primary btn-md pull-right">Anuluj</button>
+								</div>
+								<div style='float: right;'>
+									<button id="akc" class="btn btn-primary btn-md pull-right">Zatwierdź</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+		<script>
+		var modal = document.getElementById('myModal');
+		var btn = document.getElementById("anulujBtn");
+		var btn2 = document.getElementById("akc");
+		var id = -1;
+		var typ = -1;
+		
+		btn.onclick = function() {
+			modal.style.display = "none";
+		}
+
+
+		function akceptuj($typ, $id) { 
+			id = $id;
+			typ = $typ;
+			modal.style.display = "block";
+		}
+		
+		btn2.onclick = function() {
+			$.ajax({
+				type: "POST",
+				url: "akceptuj_prop.php",
+				data: {'typ': typ, 'id': id},
+				success: function(whatigot) {
+					modal.style.display = "none";
+					window.location.reload();
+					//document.getElementById("test").innerHTML = whatigot;
+			  }
+			});
+		}
+
+
+		window.onclick = function(event) {
+			if (event.target == modal) {
+				modal.style.display = "none";
+			}
+			if (event.target == modal2) {
+				modal.style.display = "none";
+			}
+			
+		}
+		</script>
 	</body>
 </html>
