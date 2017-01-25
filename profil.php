@@ -132,20 +132,25 @@ $funkcje = new Funkcje();
 						</div>
 						<div class="modal-body">
 							 <div class="form-group">
-								<label for="ctrSelect">Kraj:</label>
-								<select class="form-control" id="ctrSelect">
-									<?php $funkcje->pobierzKraje(); ?>
-								</select><br>
+								<label for="ctrSelect" class="col-sm-2 control-label">Kraj</label>
+								<div class="col-sm-10">
+									<select class="form-control" id="ctrSelect">
+										<?php $funkcje->pobierzKraje(); ?>
+									</select><br>
+								</div>
 								<div id="LaDIV"></div>
-		
-								<br><label for="stars">Standard:</label><br>
-								<fieldset class="rating" id="stars">
-									<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
-									<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
-									<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
-									<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
-									<input type="radio" id="star1" name="rating" value="1" checked="checked"/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
-								</fieldset><br>
+								<br><br><br>
+								<label for="stars" class="col-sm-2 control-label" style="padding-top: 15px;">Standard</label><br>
+								<div class="col-sm-10">
+									<fieldset class="rating" id="stars">
+										<input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+										<input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+										<input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+										<input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+										<input type="radio" id="star1" name="rating" value="1" checked="checked"/><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+									</fieldset>
+								</div>
+								<br><br>
 							</div>
 						</div>
 						<div class="modal-footer">
