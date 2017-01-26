@@ -17,6 +17,7 @@ $funkcje = new Funkcje();
 
 	<body>
 		<div class="container">
+			<a href="index.html">Powrót</a>
 			<div class="jumbotron" style="padding: 70px;">
 				<br><br>
 				<table>

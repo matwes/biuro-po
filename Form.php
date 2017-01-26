@@ -59,7 +59,7 @@ if (session_status() == PHP_SESSION_NONE) {
 					<div style="width:90%; margin: 0 auto;">
 						<div class='test'>
 							<div style='float: left;'>
-								<button onClick="location.href = 'index.php';" type="button" class="btn btn-primary btn-lg pull-right">Anuluj</button>
+								<button onClick="location.href = 'wspolpracownicy.php';" type="button" class="btn btn-primary btn-lg pull-right">Anuluj</button>
 							</div>
 							<div style='float: right;'>
 								<input id="submit" name="submit" type="submit" value="Dodaj" class="btn btn-primary btn-lg pull-right">

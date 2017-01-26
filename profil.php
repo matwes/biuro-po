@@ -107,7 +107,7 @@ $funkcje = new Funkcje();
 					
 					<div style="width:100%; margin: 0 auto;">
 						<div style='float: left;'>
-							<button onClick="location.href = 'index.php';" type="button" class="btn btn-primary btn-lg pull-right">Powrót do listy współpracowników</button>
+							<button onClick="location.href = 'wspolpracownicy.php';" type="button" class="btn btn-primary btn-lg pull-right">Powrót do listy współpracowników</button>
 						</div>
 						<div style='float: right;'>
 							<ul class="nav navbar-nav" >
