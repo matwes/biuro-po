@@ -33,6 +33,9 @@ if(!$conn->query("INSERT INTO wspolpracownik (Nazwa, Imie, Nazwisko, Telefon, Em
   die($conn->error);
 }
 
+if(!$conn->query("INSERT INTO wspolpracownik (Nazwa, Imie, Nazwisko, Telefon, Email, Login, Haslo) VALUES('Ibis','Abis','Annubis', '987654321', 'abis.annubis@ibis.eg', 'ibiabi', 'piramith')") === TRUE){
+  die($conn->error);
+}
 
 #Dodawanie krajów
 if(!$conn->query("INSERT INTO kraj (Nazwa) VALUES('Francja')") === TRUE){
@@ -43,6 +46,17 @@ if(!$conn->query("INSERT INTO kraj (Nazwa) VALUES('Niemcy')") === TRUE){
   die($conn->error);
 }
 
+if(!$conn->query("INSERT INTO kraj (Nazwa) VALUES('Chorwacja')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO kraj (Nazwa) VALUES('Norwegia')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO kraj (Nazwa) VALUES('Rosja')") === TRUE){
+  die($conn->error);
+}
 
 #Dodawanie celów podróży
 if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Berlin', (SELECT ID from kraj WHERE Nazwa='Niemcy'))") === TRUE){
@@ -74,6 +88,54 @@ if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Cannes', (S
 }
 
 if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Strasburg', (SELECT ID from kraj WHERE Nazwa='Francja'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Dubrownik', (SELECT ID from kraj WHERE Nazwa='Chorwacja'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Makarska', (SELECT ID from kraj WHERE Nazwa='Chorwacja'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Split', (SELECT ID from kraj WHERE Nazwa='Chorwacja'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Rowinji', (SELECT ID from kraj WHERE Nazwa='Chorwacja'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Oslo', (SELECT ID from kraj WHERE Nazwa='Norwegia'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Bergen', (SELECT ID from kraj WHERE Nazwa='Norwegia'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Stavanger', (SELECT ID from kraj WHERE Nazwa='Norwegia'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Trondheim', (SELECT ID from kraj WHERE Nazwa='Norwegia'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Moskwa', (SELECT ID from kraj WHERE Nazwa='Rosja'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Norilsk', (SELECT ID from kraj WHERE Nazwa='Rosja'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Yaroslavl', (SELECT ID from kraj WHERE Nazwa='Rosja'))") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `cel podrozy` (Miasto, KrajID) VALUES('Kazan', (SELECT ID from kraj WHERE Nazwa='Rosja'))") === TRUE){
   die($conn->error);
 }
 
@@ -111,6 +173,23 @@ if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, Wspolp
 if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('3','1','4')") === TRUE){
   die($conn->error);
 }
+
+if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('3','1','4')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('5','1','6')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('4','5','6')") === TRUE){
+  die($conn->error);
+}
+
+if(!$conn->query("INSERT INTO `usluga nocleg` (Standard, `Cel podrozyID`, WspolpracownikID) VALUES('4','5','6')") === TRUE){
+  die($conn->error);
+}
+
 #Dodawanie uslug przewoznikow
 #Typy 1-samolot, 2-autobus, 3-pociąg
 if(!$conn->query("INSERT INTO `usluga przejazd` (Typ, Miejsca, WspolpracownikID) VALUES('1', '55', '1')") === TRUE){
@@ -178,4 +257,61 @@ $funkcje->rozeslijZapytanieNocleg("3");
 $funkcje->rozeslijZapytaniePrzejazd("1");
 $funkcje->rozeslijZapytaniePrzejazd("2");
 $funkcje->rozeslijZapytaniePrzejazd("3");
+
+#NULL-0 brak odpowiedzi Data-1 zgoda Data-0 brak zgody NULL-1 nasza akceptacja
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='1000' WHERE ID = '1'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='1500' WHERE ID = '2'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Zaakceptowane`='1' WHERE ID = '3'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='2000' WHERE ID = '4'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='1000' WHERE ID = '1'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='6400' WHERE ID = '6'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Zaakceptowane`='1' WHERE ID = '7'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='1000' WHERE ID = '10'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='4500' WHERE ID = '1'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1' WHERE ID = '3'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='4',`Cena`='5000' WHERE ID = '4'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1' WHERE ID = '5'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='14500' WHERE ID = '7'") === TRUE){
+ die($conn->error);
+}
+
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1' WHERE ID = '8'") === TRUE){
+ die($conn->error);
+}
 ?>
