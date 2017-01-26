@@ -17,6 +17,7 @@ $funkcje = new Funkcje();
 
 	<body>
 		<div class="container">
+			<a href="main.html">Powrót</a>
 			<div class="jumbotron" style="padding: 70px;">
 				<h2 align="center">Lista współpracowników</h2>
 				<br><br>

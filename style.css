@@ -4,28 +4,28 @@
 	margin-top: 2%;
 }
 
-thead, tbody, tr, td, th {
+.table-striped thead, .table-striped tbody, .table-striped tr, .table-striped td, .table-striped th {
 	display: block;
 }
 
-tr:after {
+.table-striped tr:after {
     content: ' ';
     display: block;
     visibility: hidden;
     clear: both;
 }
 
-thead th {
+.table-striped thead th {
     height: 30px;
 }
 
-tbody {
+.table-striped tbody {
     height: 250px;
     overflow-y: auto;
 	border: hidden;
 }
 
-tbody td, thead th {
+.table-striped tbody td, .table-striped thead th {
     width: 100%;
 	height: 35px;
     float: left;

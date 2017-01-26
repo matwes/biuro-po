@@ -17,6 +17,7 @@ $funkcje = new Funkcje();
 	</head>
 	<body>
 		<div class="container">
+			<a href="main.html">Powrót</a>
 			<div class="jumbotron">
 				<div class="row" style="width: 100%;">
 				<h1 style="margin-top:0px;">Panel obsługi zapytań</h1>
@@ -64,7 +65,7 @@ $funkcje = new Funkcje();
 				<div class="modal-header">
 					<h2>Stwórz nowe zapytanie o usługę:</h2>
 					<div style="width: 70%; margin: 0 auto;">
-						<button type="button" class="btn btn-primary btn-lg" style="margin: 10px;" >Transportową</button>
+						<button type="button" class="btn btn-primary btn-lg" style="margin: 10px;" onClick="location.href = 'formularz_przejazd.php';">Transportową</button>
 						<button type="button" class="btn btn-primary btn-lg" style="margin: 10px;" onClick="location.href = 'formularz_nocleg.php';">Noclegową</button>
 					</div>
 				</div>
