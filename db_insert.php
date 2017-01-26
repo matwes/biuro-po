@@ -238,11 +238,11 @@ if(!$conn->query("INSERT INTO `zapytanie o przejazd` (Start, Koniec, Miejsca, Ty
   die($conn->error);
 }
 
-if(!$conn->query("INSERT INTO `zapytanie o przejazd` (Start, Koniec, Miejsca, Typ, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '30', '2', '1')") === TRUE){
+if(!$conn->query("INSERT INTO `zapytanie o przejazd` (Start, Koniec, Miejsca, Typ, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '30', '2', '5')") === TRUE){
   die($conn->error);
 }
 
-if(!$conn->query("INSERT INTO `zapytanie o przejazd` (Start, Koniec, Miejsca, Typ, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '60', '1', '1')") === TRUE){
+if(!$conn->query("INSERT INTO `zapytanie o przejazd` (Start, Koniec, Miejsca, Typ, `Cel podrozyID`) VALUES(DATE '2016-04-10', DATE '2016-04-20', '60', '1', '13')") === TRUE){
   die($conn->error);
 }
 

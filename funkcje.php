@@ -364,10 +364,44 @@ class Funkcje
     public function pobierzZapytaniaWspolpracownikow()
 	{
 		$conn = $this->zaladujBaze();
-		$sql = "SELECT * FROM `wspolpracownik_ zapytanie o przejazd`";
+		$sql = "SELECT * FROM `zapytanie o nocleg_wspolpracownik`";
 
 		$result = $conn->query($sql);
 		$string = "";
+		while($row = $result->fetch_assoc())
+		{
+		 $wspolpracownik = $conn->query("SELECT Nazwa FROM wspolpracownik WHERE ID = '{$row['WspolpracownikID']}'");
+		 $nazwa = $wspolpracownik->fetch_assoc()['Nazwa'];
+
+		 $zapytanie = $conn->query("SELECT Start, Koniec, `Cel podrozyID` FROM `zapytanie o nocleg` WHERE ID = '{$row['Zapytanie o noclegID']}'");
+		 $zapytanie_row = $zapytanie->fetch_assoc();
+		 $daty = $zapytanie_row['Start'];
+		 $celID = $zapytanie_row['Cel podrozyID'];
+
+		 $cel = $conn->query("SELECT Miasto, KrajID FROM `cel podrozy` WHERE ID = '{$celID}'");
+		 $miasto = $cel->fetch_assoc()['Miasto'];
+
+
+		 $string = $string . "<tr><td style = 'padding: 10px;'>Nocleg</td><td style='padding: 10px;'>" . $row['ID'] . " " . $nazwa . " " . $row['Zapytanie o noclegID'] . "</td> <td style='padding: 10px;'>" . $daty . "</td><td>" . $miasto . "</td>";
+		 
+		 if($row['Data'] === null and $row['Zaakceptowane'] == 1){
+                   $string = $string . "<td style='padding: 10px;'> &nbsp </td><td style='padding: 10px;'> Odrzucone </td></tr> \r\n";
+		 }
+		 else{
+		   if($row['Zaakceptowane'] == 0){
+        	     $string = $string . "<td style='padding: 10px;'> <input type='submit' name='{$row['ID']}' value='Akceptuj Nocleg'/> </td>";
+	             $string = $string . "<td style='padding: 10px;'> <input type='submit' name='{$row['ID']}' value='Odrzuć Nocleg'/> </td></tr> \r\n";
+	       
+		   }
+		   else{
+                     $string = $string . "<td style='padding: 10px;'>Zaakceptowane</td><td style='padding: 10px;'> &nbsp </td></tr> \r\n";
+		   }
+		 }
+	}
+		
+		$sql = "SELECT * FROM `wspolpracownik_ zapytanie o przejazd`";
+
+		$result = $conn->query($sql);
 		while($row = $result->fetch_assoc())
 		{
 		 $wspolpracownik = $conn->query("SELECT Nazwa FROM wspolpracownik WHERE ID = '{$row['WspolpracownikID']}'");
@@ -382,25 +416,54 @@ class Funkcje
 		 $miasto = $cel->fetch_assoc()['Miasto'];
 
 
-		 $string = $string . "<tr><td style='padding: 10px;'>" . $row['ID'] . " " . $nazwa . " " . $row['Zapytanie o przejazdID'] . "</td> <td style='padding: 10px;'>" . $daty . "</td> <td style='padding: 10px;'>" . $miasto;
-		 $string = $string . "</td><td style='padding: 10px;'> <input type='submit' name='{$row['ID']}' value='Akceptuj Przejazd'/> </td>";
-		 $string = $string . "<td style='padding: 10px;'> <input type='submit' name='{$row['ID']}' value='Odrzuć Przejazd'/> </td></tr> \r\n";
-		}
-		
+		 $string = $string . "<tr><td style='padding: 10px;'>Przejazd</td><td style='padding: 10px;'>" . $row['ID'] . " " . $nazwa . " " . $row['Zapytanie o przejazdID'] . "</td> <td style='padding: 10px;'>" . $daty . "</td><td>" . $miasto . "</td>";
+		 if($row['Data'] === null and $row['Zaakceptowane'] == 1){
+                   $string = $string . "<td style='padding: 10px;'>  </td><td style='padding: 10px;'> Odrzucone </td></tr> \r\n";
+		 }
+		 else{
+		   if($row['Zaakceptowane'] == 0){
+        	     $string = $string . "<td style='padding: 10px;'> <input type='submit' name='{$row['ID']}' value='Akceptuj Przejazd'/> </td>";
+	             $string = $string . "<td style='padding: 10px;'> <input type='submit' name='{$row['ID']}' value='Odrzuć Przejazd'/> </td></tr> \r\n";
+	       
+		   }
+		   else{
+                     $string = $string . "<td style='padding: 10px;'>Zaakceptowane</td><td style='padding: 10px;'>  </td></tr> \r\n";
+		   }
+		 }
+	}
+
 		
 		return $string;
 	}
 
     public function obslozZapytanie($id, $typ){
+      $conn = $this->zaladujBaze();
+
       switch($typ){
         case 'Akceptuj Przejazd':
-	  echo 'akceptuj ' . $id;
+	  $cena = rand(1000, 10000);
+          if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Zaakceptowane`='1', `Data` = DATE '2017-01-30', Cena = '{$cena}' WHERE ID = '{$id}'") === TRUE){
+            die($conn->error);
+          }
 	  break;
 	case 'Odrzuć Przejazd':
-	  echo 'odrzuc ' . $id;
+	 if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Zaakceptowane`='1' WHERE ID = '{$id}'") === TRUE){
+            die($conn->error);
+          }
+	  break;
+	case 'Akceptuj Nocleg':
+         $cena = rand(1000, 10000);
+          if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1', `Data` = DATE '2017-01-30', Cena = '{$cena}' WHERE ID = '{$id}'") === TRUE){
+            die($conn->error);
+          }
+	  break;
+	case 'Odrzuć Nocleg':
+          if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1' WHERE ID = '{$id}'") === TRUE){
+            die($conn->error);
+          }
 	  break;
 	default:
-	  echo 'Coś nie pykło';
+	  echo 'Coś nie poszło nie tak :(';
       }
     }
 
