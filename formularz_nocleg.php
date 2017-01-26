@@ -1,7 +1,7 @@
 <?php
 
 require_once 'funkcje.php';
-
+ob_start();
 $funkcje = new Funkcje();
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
@@ -24,7 +24,7 @@ if (session_status() == PHP_SESSION_NONE) {
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>	
 		<script type="text/javascript">
             $(function() {
-                $('#kraj').change(function() {
+                $('#kraj').change(function funkcja() {
                     var wybor = $(this).val();
                     $.ajax({
                         type: "POST",
@@ -34,9 +34,10 @@ if (session_status() == PHP_SESSION_NONE) {
                             $('#miasta').html(whatigot);
                         } 
                     }); 
-                }); 
+                });				
             });
-        </script>
+			
+        </script>		
 	</head>
 
 	<body onload="codeAddress();">
@@ -46,13 +47,15 @@ if (session_status() == PHP_SESSION_NONE) {
 				<br><br>
 				<form class="form-horizontal" role="form" method="post" action="formularz_nocleg.php" style="width:70%; margin: 0 auto;">
 					<div class="form-group">
+					
 						<label for="kraj" class="col-sm-2 control-label">Kraj</label>
 						<div class="col-sm-10">
-							<select class="form-control" id="kraj" name="kraj">
+							<select class="form-control" id="kraj" name="kraj" required>
 								<option disabled selected value>Wybierz kraj</option>
 								<?php echo $funkcje->generujListeKrajow() ?>
 							 </select> <br>
 						</div>
+						
 						<div id="miasta">
 						</div>
 						
@@ -69,20 +72,21 @@ if (session_status() == PHP_SESSION_NONE) {
 						
 						<label for="seats" class="col-sm-2 control-label">Liczba miejsc</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control bfh-number" id="seats" name="seats"><br><br>
+							<input type="number" class="form-control bfh-number" id="seats" name="seats" required pattern= "[0-9]" min="0" 
+							value="<?php echo $funkcje->zczytajWartosc($_POST, $_SESSION, "seats")?>"><br><br>
 						</div>
-						
 						<label for="start" class="col-sm-2 control-label">Data wyjazdu</label>
-						<div class="col-sm-4">
-							<input class="form-control" data-provide="datepicker" id="start" name="start">
+						<div class="col-sm-4" id="datawyjazdu">
+							<input class="form-control" data-provide="datepicker" id="start" name="start" required value="<?php echo $funkcje->zczytajWartosc($_POST, $_SESSION, "start")?>">
 						</div>
 						
-						<label for="end" class="col-sm-2 control-label">Data powrotu</label>
+						<label for="end" class="col-sm-2 control-label" id="datapowrotu">Data powrotu</label>
 						<div class="col-sm-4">
-							<input class="form-control" data-provide="datepicker" id="end" name="end">
+							<input class="form-control" data-provide="datepicker" id="end" name="end" required value="<?php echo $funkcje->zczytajWartosc($_POST, $_SESSION, "end")?>">
 						</div>	
 					</div>
-					<br><br>
+					<br>
+					
 					
 					<div style="width:90%; margin: 0 auto;">
 						<div class='test'>
@@ -96,27 +100,38 @@ if (session_status() == PHP_SESSION_NONE) {
 					</div>
 					
 				</form>
-			</div>
+			</div>	
+			
 		</div>
+		
+		
 		<?php
-			if(isset($_POST["submit"]))
-			{
-				if (session_status() == PHP_SESSION_NONE){
-					session_start();
-				}
-				$_SESSION["kraj"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "kraj"); 
-				$_SESSION["ctySelect"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "ctySelect"); 
-				$_SESSION["stars"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "stars"); 
-				$_SESSION["seats"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "seats"); 
-				$_SESSION["start"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "start"); 
-				$_SESSION["end"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "end"); 
-				//header("Location: zapytanie.php");
-				exit;
-			/*else{
+		if(isset($_POST["submit"]))
+		{
+			if (session_status() == PHP_SESSION_NONE) {
+					 session_start();
+		   }
+			$_SESSION["kraj"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "kraj"); 
+			$_SESSION["ctySelect"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "ctySelect"); 
+			$_SESSION["rating"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "rating"); 
+			$_SESSION["seats"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "seats"); 
+			$_SESSION["start"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "start"); 
+			$_SESSION["end"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "end"); 
+			
+			$wyjazd = date('Y-m-d', strtotime($_POST['start']));
+			$powrot = date('Y-m-d', strtotime($_POST['end']));
+			if($wyjazd > 	$powrot){
+				$message = "Data wyjazdu nie może być wcześniejsza od daty powrotu!";
 				echo "<script type='text/javascript'>alert('$message');</script>";
-			}*/
-	   }
-
-	?>
+			}
+			else
+			{
+				unset($_SESSION['blad']); 
+				header("Location:potwierdzenie_zapytania.php");
+				exit();
+			}
+	    }?>
 	</body>
 </html>
+
+

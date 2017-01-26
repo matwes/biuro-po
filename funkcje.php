@@ -131,6 +131,18 @@ class Funkcje
 		return $kraj;
 	}
 	
+	public function pobierzMiasto($id)
+	{
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT Miasto FROM `cel podrozy` WHERE ID = {$id}";
+		$result = $conn->query($sql);
+		
+		$row = $result->fetch_assoc();
+		$miasto=$row['Miasto'];
+		
+		return $miasto;
+	}
+	
 	public function pobierzKraje()
 	{
 		$conn = $this->zaladujBaze();
@@ -230,7 +242,7 @@ class Funkcje
       public function pobierzZapytania()
 	{
 		$conn = $this->zaladujBaze();
-		$sql = "SELECT * FROM `zapytanie o nocleg`";
+		$sql = "SELECT * FROM `zapytanie o nocleg` ORDER BY ID DESC";
 		$result = $conn->query($sql);
 		
 		while($row = $result->fetch_assoc())
@@ -242,7 +254,7 @@ class Funkcje
 									</div>";
 		}
 		
-		$sql = "SELECT * FROM `zapytanie o przejazd`";
+		$sql = "SELECT * FROM `zapytanie o przejazd` ORDER BY ID DESC";
 		$result = $conn->query($sql);
 		
 		while($row = $result->fetch_assoc())
@@ -282,8 +294,9 @@ class Funkcje
 		
 		while($row = $result->fetch_assoc())
 		{
+			
 			$idW = $row['WspolpracownikID'];
-			$dane = $dane . "<div style='float:left; border-radius: 25px; background-color: rgb(238, 238, 238); border: 2px solid #73AD21; margin: 5px 30px; padding: 20px; width: 220px; height: 100px;'>{$this->pobierzDane($idW, 'Nazwa')}<br>";
+			$dane = $dane . "<div style='float:left; border-radius: 25px; background-color: rgb(238, 238, 238); border: 2px solid rgb(51, 122, 183); margin: 5px 30px; padding:  10px; width: 220px; height: 100px;'>{$this->pobierzDane($idW, 'Nazwa')}<p style='margin-bottom: 3px;'>{$row['Cena']} złotych</p>";
 			if($row['Data']==NULL)
 			{
 				if($row['Zaakceptowane']==0)
@@ -294,7 +307,7 @@ class Funkcje
 			else if($row['Zaakceptowane']==0)
 				$dane = $dane."<p style='color:red; font-size:15px;'>Propozycja odrzucona</p></div>";
 			else
-				$dane = $dane."<button onclick='akceptuj({$typ}, {$row['ID']})' type='button' class='btn btn-success' style='margin: 5px 40px;'>Zaakceptuj</button></div>";
+				$dane = $dane."<button onclick='akceptuj({$typ}, {$row['ID']})' type='button' class='btn btn-primary' style='margin: 15px 50px;'>Zaakceptuj</button></div>";
 		}
 		
 		return $dane;
@@ -355,8 +368,8 @@ class Funkcje
       $result = $conn->query($sql);
       $string = "";
       while($row = $result->fetch_assoc()){
-        $string =  $string . "<option value='" . $row['ID'] . "'>" . $row['Nazwa'] . '</option>
-';
+        /*$string =  $string . "<option value='" . $row['ID'] . "' <?=($funkcje->zczytajWartosc($_POST, $_SESSION, \"kraj\")) == {$row['ID']} ? ' selected=\"selected\"' : '';?>" . $row['Nazwa'] . '</option>';*/
+		$string =  $string . "<option value='" . $row['ID'] . "'>" . $row['Nazwa'] . '</option>';
       }
       return $string;
     }
