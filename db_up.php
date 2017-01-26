@@ -46,19 +46,11 @@ if(!$conn->query("CREATE TABLE `Usluga nocleg` (ID int(10) NOT NULL AUTO_INCREME
   die($conn->error);
 }
 
-if(!$conn->query("CREATE TABLE `Wyjazd_Usluga przejazd` (WyjazdID int(10) NOT NULL, `Usluga przejazdID` int(10) NOT NULL, DataR date NOT NULL, DataZ date NOT NULL, WspolpracownikID2 int(10) NOT NULL, PRIMARY KEY (WyjazdID, `Usluga przejazdID`));") === TRUE){
+if(!$conn->query("CREATE TABLE `Wspolpracownik_ Zapytanie o przejazd` (ID int(10) NOT NULL AUTO_INCREMENT, WspolpracownikID int(10) NOT NULL, `Zapytanie o przejazdID` int(10) NOT NULL, Data date, Zaakceptowane TINYINT(1) DEFAULT '0', Cena Double DEFAULT '0', PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 
-if(!$conn->query("CREATE TABLE `Usluga nocleg_Wyjazd` (`Usluga noclegID` int(10) NOT NULL, WyjazdID int(10) NOT NULL, DataR date NOT NULL, DataZ date NOT NULL, WspolpracownikID2 int(10) NOT NULL, PRIMARY KEY (`Usluga noclegID`, WyjazdID));") === TRUE){
-  die($conn->error);
-}
-
-if(!$conn->query("CREATE TABLE `Wspolpracownik_ Zapytanie o przejazd` (ID int(10) NOT NULL AUTO_INCREMENT, WspolpracownikID int(10) NOT NULL, `Zapytanie o przejazdID` int(10) NOT NULL, Data date, Zaakceptowane TINYINT(1) DEFAULT '0', PRIMARY KEY (ID));") === TRUE){
-  die($conn->error);
-}
-
-if(!$conn->query("CREATE TABLE `Zapytanie o nocleg_Wspolpracownik` (ID int(10) NOT NULL AUTO_INCREMENT, `Zapytanie o noclegID` int(10) NOT NULL, WspolpracownikID int(10) NOT NULL, Data date, Zaakceptowane TINYINT(1) DEFAULT '0', PRIMARY KEY (ID));") === TRUE){
+if(!$conn->query("CREATE TABLE `Zapytanie o nocleg_Wspolpracownik` (ID int(10) NOT NULL AUTO_INCREMENT, `Zapytanie o noclegID` int(10) NOT NULL, WspolpracownikID int(10) NOT NULL, Data date, Zaakceptowane TINYINT(1) DEFAULT '0', Cena Double DEFAULT '0', PRIMARY KEY (ID));") === TRUE){
   die($conn->error);
 }
 
@@ -71,23 +63,6 @@ if(!$conn->query("CREATE TABLE `Zapytanie o nocleg` (ID int(10) NOT NULL AUTO_IN
 }
 
 if(!$conn->query("CREATE TABLE `Zapytanie o przejazd` (ID int(10) NOT NULL AUTO_INCREMENT, Start date NOT NULL, Koniec date NOT NULL, Miejsca int(10) NOT NULL, Typ int(10) NOT NULL, `Cel podrozyID` int(10) NOT NULL, PRIMARY KEY (ID));") === TRUE){
-  die($conn->error);
-}
-
-if(!$conn->query("ALTER TABLE `Wyjazd_Usluga przejazd` ADD INDEX FKWyjazd_Usl323806 (`Usluga przejazdID`), ADD CONSTRAINT FKWyjazd_Usl323806 FOREIGN KEY (`Usluga przejazdID`) REFERENCES `Usluga przejazd` (ID);") === TRUE){
-  die($conn->error);
-}
-
-if(!$conn->query("ALTER TABLE `Usluga nocleg_Wyjazd` ADD INDEX `FKUsluga noc475283` (`Usluga noclegID`), ADD CONSTRAINT `FKUsluga noc475283` FOREIGN KEY (`Usluga noclegID`) REFERENCES `Usluga nocleg` (ID);") === TRUE){
-  die($conn->error);
-}
-
-
-if(!$conn->query("ALTER TABLE `Usluga nocleg_Wyjazd` ADD INDEX `FKUsluga noc560082` (WspolpracownikID2), ADD CONSTRAINT `FKUsluga noc560082` FOREIGN KEY (WspolpracownikID2) REFERENCES Wspolpracownik (ID);") === TRUE){
-  die($conn->error);
-}
-
-if(!$conn->query("ALTER TABLE `Wyjazd_Usluga przejazd` ADD INDEX FKWyjazd_Usl845745 (WspolpracownikID2), ADD CONSTRAINT FKWyjazd_Usl845745 FOREIGN KEY (WspolpracownikID2) REFERENCES Wspolpracownik (ID);") === TRUE){
   die($conn->error);
 }
 
