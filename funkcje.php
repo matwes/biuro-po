@@ -382,14 +382,27 @@ class Funkcje
 		 $miasto = $cel->fetch_assoc()['Miasto'];
 
 
-		 $string = $string . "<tr><td style='padding: 10px;'>" . $row['ID'] . " " . $nazwa . " " . $row['Zapytanie o przejazdID'] . "</td> <td style='padding: 10px;'>" . $daty . "</td> <td style='padding: 10px;'>" . $miasto . "</td><td style='padding: 10px;'> Przycisk </td></tr> \r\n";
+		 $string = $string . "<tr><td style='padding: 10px;'>" . $row['ID'] . " " . $nazwa . " " . $row['Zapytanie o przejazdID'] . "</td> <td style='padding: 10px;'>" . $daty . "</td> <td style='padding: 10px;'>" . $miasto;
+		 $string = $string . "</td><td style='padding: 10px;'> <input type='submit' name='{$row['ID']}' value='Akceptuj Przejazd'/> </td>";
+		 $string = $string . "<td style='padding: 10px;'> <input type='submit' name='{$row['ID']}' value='Odrzuć Przejazd'/> </td></tr> \r\n";
 		}
 		
 		
 		return $string;
 	}
 
-
+    public function obslozZapytanie($id, $typ){
+      switch($typ){
+        case 'Akceptuj Przejazd':
+	  echo 'akceptuj ' . $id;
+	  break;
+	case 'Odrzuć Przejazd':
+	  echo 'odrzuc ' . $id;
+	  break;
+	default:
+	  echo 'Coś nie pykło';
+      }
+    }
 
 }
 

@@ -4,6 +4,9 @@ require_once 'funkcje.php';
 
 $funkcje = new Funkcje();
 
+if(count($_POST)>0){
+  $funkcje->obslozZapytanie(key($_POST), current($_POST));
+}
 
 ?>
 <!DOCTYPE html>
@@ -20,10 +23,12 @@ $funkcje = new Funkcje();
 			<a href="index.html">Powrót</a>
 			<div class="jumbotron" style="padding: 70px;">
 				<br><br>
+				<form method='post' action='zapytania_wspolpracownikow.php'>
 				<table>
 					<thead><tr><th>Zapytania</th></tr></thead>
 					<tbody><?php echo $funkcje->pobierzZapytaniaWspolpracownikow();?></tbody>
 				</table>
+				</form>
 				
 			</div>
 		</div>
