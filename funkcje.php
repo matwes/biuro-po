@@ -361,6 +361,36 @@ class Funkcje
       return $string;
     }
 
+    public function pobierzZapytaniaWspolpracownikow()
+	{
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT * FROM `wspolpracownik_ zapytanie o przejazd`";
+
+		$result = $conn->query($sql);
+		$string = "";
+		while($row = $result->fetch_assoc())
+		{
+		 $wspolpracownik = $conn->query("SELECT Nazwa FROM wspolpracownik WHERE ID = '{$row['WspolpracownikID']}'");
+		 $nazwa = $wspolpracownik->fetch_assoc()['Nazwa'];
+
+		 $zapytanie = $conn->query("SELECT Start, Koniec, `Cel podrozyID` FROM `zapytanie o przejazd` WHERE ID = '{$row['Zapytanie o przejazdID']}'");
+		 $zapytanie_row = $zapytanie->fetch_assoc();
+		 $daty = $zapytanie_row['Start'];
+		 $celID = $zapytanie_row['Cel podrozyID'];
+
+		 $cel = $conn->query("SELECT Miasto, KrajID FROM `cel podrozy` WHERE ID = '{$celID}'");
+		 $miasto = $cel->fetch_assoc()['Miasto'];
+
+
+		 $string = $string . "<tr><td style='padding: 10px;'>" . $row['ID'] . " " . $nazwa . " " . $row['Zapytanie o przejazdID'] . "</td> <td style='padding: 10px;'>" . $daty . "</td> <td style='padding: 10px;'>" . $miasto . "</td><td style='padding: 10px;'> Przycisk </td></tr> \r\n";
+		}
+		
+		
+		return $string;
+	}
+
+
+
 }
 
 ?>	
