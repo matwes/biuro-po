@@ -116,7 +116,8 @@ if (session_status() == PHP_SESSION_NONE) {
 			$_SESSION["rating"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "rating"); 
 			$_SESSION["seats"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "seats"); 
 			$_SESSION["start"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "start"); 
-			$_SESSION["end"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "end"); 
+			$_SESSION["end"] = $funkcje->zczytajWartosc($_POST, $_SESSION, "end");
+			$_SESSION["type"] =	1;				
 			
 			$wyjazd = date('Y-m-d', strtotime($_POST['start']));
 			$powrot = date('Y-m-d', strtotime($_POST['end']));
@@ -126,8 +127,8 @@ if (session_status() == PHP_SESSION_NONE) {
 			}
 			else
 			{
-				unset($_SESSION['blad']); 
-				header("Location:potwierdzenie_zapytania.php");
+				//print_r($_SESSION);
+				header("Location:zapytanie.php");
 				exit();
 			}
 	    }?>

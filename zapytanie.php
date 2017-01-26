@@ -14,13 +14,13 @@ if (session_status() == PHP_SESSION_NONE) {
 		<link rel="stylesheet" type="text/css" href="style.css">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<meta charset="utf-8">
-		<title>Dane nowego wpółpracownika</title>
+		<title>Tworzenie nowego zapytania:</title>
 	</head>
 	<body>
 
 		<div class="container">
 			<div class="jumbotron">
-				<h2 align="center">Dane nowego współpracownika</h2>
+				<h2 align="center">Wprowadzone dane:</h2>
 				<br/><br/>
 				
 				<div class="row" style="width: 50%; margin:0 auto;">
@@ -39,7 +39,28 @@ if (session_status() == PHP_SESSION_NONE) {
 									</div>
 									<label for="rating" class="col-sm-4 control-label">Standard</label>
 									<div class="col-sm-8">
-										<p class="nowyWsp" id="rating" name="rating"><?php echo $_SESSION["rating"] ?>-gwiazdkowy</p>
+										<p class="nowyWsp" id="rating" name="rating">
+											<?php
+												if($_SESSION["type"]==1)
+													echo $_SESSION["rating"]."-gwiazdkowy";
+												else if($_SESSION["type"]==2)
+												{
+													$lok = "";
+													switch ($_SESSION["rating"]) {
+														case 1:
+															$lok = 'Samolot';
+															break;
+														case 2:
+															$lok = 'Autobus';
+															break;
+														case 3:
+															$lok = 'Statek';
+															break;
+													}
+													echo $lok;
+												}
+											?>
+										</p>
 									</div>
 									<label for="seats" class="col-sm-4 control-label">Liczba miejsc</label>
 									<div class="col-sm-8">

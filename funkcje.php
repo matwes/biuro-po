@@ -296,7 +296,7 @@ class Funkcje
 		{
 			
 			$idW = $row['WspolpracownikID'];
-			$dane = $dane . "<div style='float:left; border-radius: 25px; background-color: rgb(238, 238, 238); border: 2px solid rgb(51, 122, 183); margin: 5px 30px; padding:  10px; width: 220px; height: 100px;'>{$this->pobierzDane($idW, 'Nazwa')}<p style='margin-bottom: 3px;'>{$row['Cena']} złotych</p>";
+			$dane = $dane . "<div style='float:left; border-radius: 25px; background-color: rgb(238, 238, 238); border: 2px solid rgb(51, 122, 183); margin: 15px 30px; padding:  10px; width: 220px; height: 100px;'>{$this->pobierzDane($idW, 'Nazwa')}<p style='margin-bottom: 3px;'>{$row['Cena']} złotych</p>";
 			if($row['Data']==NULL)
 			{
 				if($row['Zaakceptowane']==0)
