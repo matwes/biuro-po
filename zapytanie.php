@@ -84,7 +84,14 @@ if (session_status() == PHP_SESSION_NONE) {
 					<h5 align="center">Zatwierdź poprawność danych</h5><br>
 						<div class='test'>
 							<div style='float: left;'>
-								<button onclick="location.href = 'formularz_nocleg.php';" type="button" class="btn btn-primary btn-lg pull-right">Wróc i popraw</button>
+								<button onclick="location.href = '<?php
+												if($_SESSION["type"]==1)
+													echo "formularz_nocleg.php";
+												else if($_SESSION["type"]==2)
+												{
+													echo "formularz_przejazd.php";
+												}
+											?> ';" type="button" class="btn btn-primary btn-lg pull-right">Wróc i popraw</button>
 							</div>
 							<div style='float: right;'>
 								<button onClick="location.href = 'dodaj_zapytanie.php'" type="button" class="btn btn-primary btn-lg pull-right">Zatwierdź</button>

@@ -24,7 +24,19 @@ if (session_status() == PHP_SESSION_NONE) {
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>	
 		<script type="text/javascript">
             $(function() {
-                $('#kraj').change(function() {
+				$('#kraj').val("1");
+				
+				 var wybor = $('#kraj').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "miasta.php",
+                        data: {'theOption': wybor},
+                        success: function(whatigot) {
+                            $('#miasta').html(whatigot);
+                        } 
+                    });
+
+					$('#kraj').change(function funkcja() {
                     var wybor = $(this).val();
                     $.ajax({
                         type: "POST",
@@ -34,7 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             $('#miasta').html(whatigot);
                         } 
                     }); 
-                }); 
+                });	
             });
         </script>
 	</head>
@@ -42,13 +54,13 @@ if (session_status() == PHP_SESSION_NONE) {
 	<body onload="codeAddress();">
 		<div class="container">
 			<div class="jumbotron" style="padding: 70px;">
-				<h2 align= "center">Dodawanie nowego zapytania o usługę noclegową</h2>
+				<h2 align= "center">Dodawanie nowego zapytania o usługę przejazdową</h2>
 				<br><br>
-				<form class="form-horizontal" role="form" method="post" action="formularz_nocleg.php" style="width:70%; margin: 0 auto;">
+				<form class="form-horizontal" role="form" method="post" action="formularz_przejazd.php" style="width:70%; margin: 0 auto;">
 					<div class="form-group">
 						<label for="kraj" class="col-sm-2 control-label">Kraj</label>
 						<div class="col-sm-10">
-							<select class="form-control" id="kraj" name="kraj">
+							<select class="form-control" id="kraj" name="kraj"  required>
 								<option disabled selected value>Wybierz kraj</option>
 								<?php echo $funkcje->generujListeKrajow() ?>
 							 </select> <br>
@@ -58,10 +70,10 @@ if (session_status() == PHP_SESSION_NONE) {
 						
 						<label for="lok" class="col-sm-2 control-label">Środek komunikacji</label>
 						<div class="col-sm-10">
-								<select class="form-control" id="lok">
-									<option value="1">Samolot</option>
-									<option value="2">Autobus</option>
-									<option value="3">Statek</option>
+								<select class="form-control" id="rating" name="rating">
+									<option value="1" name="rating">Samolot</option>
+									<option value="2" name="rating">Autobus</option>
+									<option value="3" name="rating">Statek</option>
 								</select><br>
 						</div>
 						

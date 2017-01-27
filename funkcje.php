@@ -3,9 +3,7 @@
 class Funkcje
 {
 		public function zaladujBaze()
-	{
-		$udaloSie = true;
-		
+	{		
 		$checkconnection = mysqli_connect('localhost', 'root', 'pass');
 		if(!$checkconnection) {
 			die('Nie udało się połączyć do bazy danych');
@@ -25,22 +23,23 @@ class Funkcje
 		$conn = $this->zaladujBaze();
 		$sql = "SELECT Nazwa, ID FROM wspolpracownik";
 		$result = $conn->query($sql);
+		$wsp = '';
 		
 		$i = 0;
 		while($row = $result->fetch_assoc())
 		{
 			$id = $row['ID'];
-			echo "<tr><td><a class='nazwyF' href='profil.php?id={$id}'>".$row['Nazwa']."</a></td></tr>";
+			$wsp = $wsp . "<tr><td><a class='nazwyF' href='profil.php?id={$id}'>".$row['Nazwa']."</a></td></tr>";
 			$i = $i + 1;
 		}
 		
 		while($i < 7)
 		{
-			echo "<tr><td></td></tr>";
+			$wsp = $wsp . "<tr><td></td></tr>";
 			$i = $i + 1;
 		}
 		
-		return $i;
+		return $wsp;
 	}
 	
 	public function pobierzUslugi($id)
@@ -48,6 +47,7 @@ class Funkcje
 		$conn = $this->zaladujBaze();
 		$sql = "SELECT Standard, `Cel podrozyID` FROM `usluga nocleg` WHERE WspolpracownikID = {$id}";
 		$result = $conn->query($sql);
+		$uslugi = '';
 		
 		$i = 0;
 		while($row = $result->fetch_assoc())
@@ -69,7 +69,7 @@ class Funkcje
 					$star = 'gwiazdek';
 					break;
 			}
-			echo "<tr><td style='width:80%;'><span class='nazwyF'>".$this->pobierzCelPodrozy($row['Cel podrozyID'])." - <i>".$row['Standard']." {$star}</i></span></td>
+			$uslugi = $uslugi. "<tr><td style='width:80%;'><span class='nazwyF'>".$this->pobierzCelPodrozy($row['Cel podrozyID'])." - <i>".$row['Standard']." {$star}</i></span></td>
 								<td style='width:20%;'><span class='nazwyF'>Noclegowa</span></td></tr>";
 			$i = $i + 1;
 		}
@@ -77,6 +77,7 @@ class Funkcje
 		
 		$sql = "SELECT Typ, Miejsca FROM `usluga przejazd` WHERE WspolpracownikID = {$id}";
 		$result = $conn->query($sql);
+		$uslugaP = mysqli_num_rows($result);
 		while($row = $result->fetch_assoc())
 		{
 			switch ($row['Typ']) {
@@ -90,18 +91,18 @@ class Funkcje
 					$lok = 'Statek';
 					break;
 			}
-			echo "<tr><td style='width:80%;'><span class='nazwyF'><b>".$lok."</b> - <i>".$row['Miejsca']." miejsc</i></span></td>
+			$uslugi = $uslugi. "<tr><td style='width:80%;'><span class='nazwyF'><b>".$lok."</b> - <i>".$row['Miejsca']." miejsc</i></span></td>
 								<td style='width:20%;'><span class='nazwyF'>Przejazdowa</span></td></tr>";
 			$i = $i + 1;
 		}
 		
 		while($i < 3)
 		{
-			echo "<tr><td></td></tr>";
+			$uslugi = $uslugi. "<tr><td></td></tr>";
 			$i = $i + 1;
 		}
 		
-		return $i;
+		return $uslugi;
 	}
 	
 	public function pobierzCelPodrozy($id)
@@ -368,12 +369,12 @@ class Funkcje
       $result = $conn->query($sql);
       $string = "";
       while($row = $result->fetch_assoc()){
-        /*$string =  $string . "<option value='" . $row['ID'] . "' <?=($funkcje->zczytajWartosc($_POST, $_SESSION, \"kraj\")) == {$row['ID']} ? ' selected=\"selected\"' : '';?>" . $row['Nazwa'] . '</option>';*/
-		$string =  $string . "<option value='" . $row['ID'] . "'>" . $row['Nazwa'] . '</option>';
+        $string =  $string . "<option value='" . $row['ID'] . "' <?=($funkcje->zczytajWartosc($_POST, $_SESSION, \"kraj\")) == {$row['ID']} ? ' selected=\"selected\"' : '';?>" . $row['Nazwa'] . '</option>';
+		//$string =  $string . "<option value='" . $row['ID'] . "'>" . $row['Nazwa'] . '</option>';
       }
       return $string;
     }
-
+	
     public function pobierzZapytaniaWspolpracownikow()
 	{
 		$conn = $this->zaladujBaze();

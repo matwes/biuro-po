@@ -101,7 +101,7 @@ $funkcje = new Funkcje();
 							</tr>
 						</thead>
 						<tbody style="height:110px;">
-							<?php $funkcje->pobierzUslugi($id); ?>
+							<?php echo $funkcje->pobierzUslugi($id); ?>
 						</tbody>
 					</table>
 					
