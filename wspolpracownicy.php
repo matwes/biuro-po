@@ -23,7 +23,7 @@ $funkcje = new Funkcje();
 				<br><br>
 				<table class="table table-striped">
 					<thead><tr><th>Nazwa firmy</th></tr></thead>
-					<tbody><?php $funkcje->pobierzWspolpracownikow();?></tbody>
+					<tbody><?php echo $funkcje->pobierzWspolpracownikow();?></tbody>
 				</table>
 				
 				<span style="text-align:right">

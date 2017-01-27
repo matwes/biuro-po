@@ -1,9 +1,8 @@
 <?php
 
 require_once 'funkcje.php';
-
 $funkcje = new Funkcje();
-	
+
 ?>
 <!DOCTYPE html>
 <html lang ="pl">

@@ -24,6 +24,18 @@ if (session_status() == PHP_SESSION_NONE) {
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>	
 		<script type="text/javascript">
             $(function() {
+                $('#kraj').val("1");
+				
+				 var wybor = $('#kraj').val();
+                    $.ajax({
+                        type: "POST",
+                        url: "miasta.php",
+                        data: {'theOption': wybor},
+                        success: function(whatigot) {
+                            $('#miasta').html(whatigot);
+                        } 
+                    }); 
+
                 $('#kraj').change(function funkcja() {
                     var wybor = $(this).val();
                     $.ajax({
@@ -34,7 +46,7 @@ if (session_status() == PHP_SESSION_NONE) {
                             $('#miasta').html(whatigot);
                         } 
                     }); 
-                });				
+                });						
             });
 			
         </script>		

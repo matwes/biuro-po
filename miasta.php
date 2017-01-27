@@ -22,7 +22,7 @@
     $result = $conn->query($query);
     $num_rows_returned = mysqli_num_rows($result);
 
-    $r = '<label for="ctySelect" class="col-sm-2 control-label">Miasto</label><div class="col-sm-10" id="miasta"><select class="form-control" id="ctySelect" name="ctySelect">';
+    $r = '<label for="ctySelect" class="col-sm-2 control-label">Miasto</label><div class="col-sm-10" id="miasta"><select class="form-control" id="ctySelect" name="ctySelect"  required>';
 
     if ($num_rows_returned > 0)
 	{
