@@ -2,7 +2,7 @@
 
 class Funkcje
 {
-		public function zaladujBaze()
+	public function zaladujBaze()
 	{		
 		$checkconnection = mysqli_connect('localhost', 'root', 'pass');
 		if(!$checkconnection) {
@@ -149,30 +149,38 @@ class Funkcje
 		$conn = $this->zaladujBaze();
 		$sql = "SELECT Nazwa, ID FROM `kraj`";
 		$result = $conn->query($sql);
+		$kraje = "";
 		
 		$i  = 1;
 		while($row = $result->fetch_assoc())
 		{
 			if($i == 1){
-				echo "<option selected='selected' value={$row['ID']}>{$row['Nazwa']}</option>";
+				$kraje = $kraje. "<option selected='selected' value={$row['ID']}>{$row['Nazwa']}</option>";
 				$i=0;
 			}
 			else
-				echo "<option value={$row['ID']}>{$row['Nazwa']}</option>";
+				$kraje = $kraje. "<option value={$row['ID']}>{$row['Nazwa']}</option>";
 		}
 		
-		return $i;
+		return $kraje;
 	}
 	
 	public function pobierzDane($id, $atr){
-		 $conn = $this->zaladujBaze();
-		 $sql = "SELECT {$atr} FROM wspolpracownik WHERE ID = {$id};";
-		 $result = $conn->query($sql);
+		$conn = $this->zaladujBaze();
+		$sql = "SELECT {$atr} FROM wspolpracownik WHERE ID = {$id};";
+		$result = $conn->query($sql);
+		$num_rows_returned = mysqli_num_rows($result);
+		$data = '';
 		 
-		 $data = '';
-		 while($row = $result->fetch_assoc())
+		
+		 if ($num_rows_returned > 0)
 		{
-			$data = $row[$atr];
+			while($row = $result->fetch_assoc())
+			{
+				$data = $row[$atr];
+			}
+		} else {
+			$data = 'Nie znaleziono wspolpracownika o takim id.';
 		}
 		 
 		 return $data;

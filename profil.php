@@ -135,7 +135,7 @@ $funkcje = new Funkcje();
 								<label for="ctrSelect" class="col-sm-2 control-label">Kraj</label>
 								<div class="col-sm-10">
 									<select class="form-control" id="ctrSelect">
-										<?php $funkcje->pobierzKraje(); ?>
+										<?php echo $funkcje->pobierzKraje(); ?>
 									</select><br>
 								</div>
 								<div id="LaDIV"></div>
