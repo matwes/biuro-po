@@ -37,6 +37,10 @@ if(!$conn->query("INSERT INTO wspolpracownik (Nazwa, Imie, Nazwisko, Telefon, Em
   die($conn->error);
 }
 
+if(!$conn->query("INSERT INTO wspolpracownik (Nazwa, Imie, Nazwisko, Telefon, Email, Login, Haslo) VALUES('Polonia','Artur','Grzybowski', '123321667', 'a.grzyb@polonia.pl', 'grzyb', 'muchomor')") === TRUE){
+  die($conn->error);
+}
+
 #Dodawanie krajów
 if(!$conn->query("INSERT INTO kraj (Nazwa) VALUES('Francja')") === TRUE){
   die($conn->error);
@@ -299,7 +303,7 @@ if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data` = DATE '
  die($conn->error);
 }
 
-if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='4',`Cena`='5000' WHERE ID = '4'") === TRUE){
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data`= DATE '2017-01-30' ,`Zaakceptowane`='1',`Cena`='5000' WHERE ID = '4'") === TRUE){
  die($conn->error);
 }
 
