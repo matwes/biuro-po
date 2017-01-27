@@ -460,7 +460,7 @@ class Funkcje
           }
 	  break;
 	case 'Odrzuć Przejazd':
-	 if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Zaakceptowane`='1' WHERE ID = '{$id}'") === TRUE){
+	 if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data` = DATE '2017-01-30' WHERE ID = '{$id}'") === TRUE){
             die($conn->error);
           }
 	  break;
@@ -471,7 +471,7 @@ class Funkcje
           }
 	  break;
 	case 'Odrzuć Nocleg':
-          if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1' WHERE ID = '{$id}'") === TRUE){
+          if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data` = DATE '2017-01-30' WHERE ID = '{$id}'") === TRUE){
             die($conn->error);
           }
 	  break;

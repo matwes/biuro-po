@@ -267,7 +267,7 @@ if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE
  die($conn->error);
 }
 
-if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Zaakceptowane`='1' WHERE ID = '3'") === TRUE){
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE '2017-01-30' WHERE ID = '3'") === TRUE){
  die($conn->error);
 }
 
@@ -283,7 +283,7 @@ if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data`= DATE
  die($conn->error);
 }
 
-if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Zaakceptowane`='1' WHERE ID = '7'") === TRUE){
+if(!$conn->query("UPDATE `wspolpracownik_ zapytanie o przejazd` SET `Data` = DATE '2017-01-30'  WHERE ID = '7'") === TRUE){
  die($conn->error);
 }
 
@@ -295,7 +295,7 @@ if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data`= DATE '2
  die($conn->error);
 }
 
-if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1' WHERE ID = '3'") === TRUE){
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data` = DATE '2017-01-30' WHERE ID = '3'") === TRUE){
  die($conn->error);
 }
 
@@ -303,7 +303,7 @@ if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data`= DATE '2
  die($conn->error);
 }
 
-if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1' WHERE ID = '5'") === TRUE){
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data` = DATE '2017-01-30' WHERE ID = '5'") === TRUE){
  die($conn->error);
 }
 
@@ -311,7 +311,7 @@ if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data`= DATE '2
  die($conn->error);
 }
 
-if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Zaakceptowane`='1' WHERE ID = '8'") === TRUE){
+if(!$conn->query("UPDATE `zapytanie o nocleg_wspolpracownik` SET `Data` = DATE '2017-01-30' WHERE ID = '8'") === TRUE){
  die($conn->error);
 }
 ?>
