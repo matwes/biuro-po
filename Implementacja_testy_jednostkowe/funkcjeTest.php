@@ -1,0 +1,77 @@
+<?php
+
+require_once 'funkcje.php';
+
+class FunkcjeTest extends PHPUnit_Framework_TestCase
+{
+	public function testPobierzWspolpracownikow()
+	{
+		$funkcje = new Funkcje();
+		$oczekiwanie = "<tr><td><a class='nazwyF' href='profil.php?id=1'>LOT</a></td></tr><tr><td><a class='nazwyF' href='profil.php?id=2'>RYANAIR</a></td></tr><tr><td><a class='nazwyF' href='profil.php?id=3'>POLSKI BUS</a></td></tr><tr><td><a class='nazwyF' href='profil.php?id=4'>Marriot</a></td></tr><tr><td><a class='nazwyF' href='profil.php?id=5'>Tipton</a></td></tr><tr><td><a class='nazwyF' href='profil.php?id=6'>Ibis</a></td></tr><tr><td><a class='nazwyF' href='profil.php?id=7'>Polonia</a></td></tr>";
+		$this->assertEquals($oczekiwanie, $funkcje->pobierzWspolpracownikow());
+	}
+	
+	public function testPobierzUslugi()
+	{
+		$funkcje = new Funkcje();
+		$id = 1;
+		$oczekiwanie = "<tr><td style='width:80%;'><span class='nazwyF'><b>Samolot</b> - <i>55 miejsc</i></span></td>
+								<td style='width:20%;'><span class='nazwyF'>Przejazdowa</span></td></tr><tr><td style='width:80%;'><span class='nazwyF'><b>Samolot</b> - <i>66 miejsc</i></span></td>
+								<td style='width:20%;'><span class='nazwyF'>Przejazdowa</span></td></tr><tr><td style='width:80%;'><span class='nazwyF'><b>Samolot</b> - <i>77 miejsc</i></span></td>
+								<td style='width:20%;'><span class='nazwyF'>Przejazdowa</span></td></tr>";
+		$this->assertEquals($oczekiwanie, $funkcje->pobierzUslugi($id));
+	}
+	
+	public function testPobierzUslugi2()
+	{
+		$funkcje = new Funkcje();
+		$id =  7;
+		$oczekiwanie = "<tr><td></td></tr><tr><td></td></tr><tr><td></td></tr>";
+		$this->assertEquals($oczekiwanie, $funkcje->pobierzUslugi($id));
+	}
+	
+	public function testPobierzCelPodorozy()
+	{
+		$funkcje = new Funkcje();
+		$id =  3;
+		$oczekiwanie = "<b>Niemcy</b> - Essen";
+		$this->assertEquals($oczekiwanie, $funkcje->pobierzCelPodrozy($id));
+	
+	}
+	public function testPobierzKraj()
+	{
+		$funkcje = new Funkcje();
+		$id =  1;
+		$oczekiwanie = "Francja";
+		$this->assertEquals($oczekiwanie, $funkcje->pobierzKraj($id));
+	
+	}
+	public function testPobierzMiasto()
+	{
+		$funkcje = new Funkcje();
+		$id =  13;
+		$oczekiwanie = "Oslo";
+		$this->assertEquals($oczekiwanie, $funkcje->pobierzMiasto($id));
+	
+	}
+	public function testPobierzDane()
+	{
+		$funkcje = new Funkcje();
+		$id = 10;
+		$at = "Nazwa";
+		$oczekiwanie =  "Nie znaleziono wspolpracownika o takim id.";
+		$this->assertEquals($oczekiwanie, $funkcje->pobierzDane($id, $at));
+	
+	}
+	public function testPobierzDane2()
+	{
+		$funkcje = new Funkcje();
+		$id = 6;
+		$at = "Nazwa";
+		$oczekiwanie =  "Ibis";
+		$this->assertEquals($oczekiwanie, $funkcje->pobierzDane($id, $at));
+	
+	}
+}
+?>
+

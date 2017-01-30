@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head profile="http://selenium-ide.openqa.org/profiles/test-case">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="selenium.base" href="http://localhost:1234/" />
+<title>Dodawanie_wspolpracownika</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">Dodawanie_wspolpracownika</td></tr>
+</thead><tbody>
+<tr>
+	<td>open</td>
+	<td>/biuro-po/index.html</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@onclick=&quot;location.href = 'wspolpracownicy.php'&quot;]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//button[@type='button']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=firma</td>
+	<td>Nowa nazwa</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=imie</td>
+	<td>Marcin</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=nazw</td>
+	<td>Kowalski</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=tel</td>
+	<td>123432109</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>id=email</td>
+	<td>marcin@gmail.com</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>id=submit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>xpath=(//button[@type='button'])[2]</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
